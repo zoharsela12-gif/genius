@@ -1,27 +1,254 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>האקדמיה לגאונות בפשטות</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      background: #fafafa;
-      color: #222;
-    }
-    h1 {
-      font-size: 2rem;
-      text-align: center;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>האקדמיה לגאונות בפשטות | בת שבע צור</title>
+<style>
+  :root {
+    --gold: #C9A227;
+    --gold-light: #E3C766;
+    --green-deep: #0F3D30;
+    --green: #1B7A5E;
+    --red: #D9455B;
+    --cream: #FBF8F1;
+    --text: #22301F;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Assistant', Arial, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  a { text-decoration: none; color: inherit; }
+  ul { list-style: none; }
+  img { max-width: 100%; display: block; }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 6%;
+    background: var(--cream);
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  header .logo img { height: 64px; }
+  nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+  }
+  nav a {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--green-deep);
+    transition: color .2s;
+  }
+  nav a:hover { color: var(--gold); }
+
+  .hero {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    padding: 40px 6% 60px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .hero-text { flex: 1.2; min-width: 320px; }
+  .hero-image { flex: 1; min-width: 280px; max-width: 380px; }
+  .hero-image .frame {
+    width: 100%;
+    aspect-ratio: 4/5;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--green-deep);
+  }
+  .hero-image .frame img { width: 100%; height: 100%; object-fit: cover; }
+
+  .eyebrow {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .hero h1 {
+    font-size: clamp(30px, 3.6vw, 44px);
+    font-weight: 700;
+    color: var(--green-deep);
+    margin-bottom: 20px;
+  }
+  .lead {
+    font-size: 17px;
+    margin-bottom: 8px;
+  }
+  .lead.small { color: var(--green); font-weight: 600; margin-bottom: 24px; }
+
+  .poem {
+    font-size: clamp(19px, 2.1vw, 24px);
+    font-weight: 600;
+    color: var(--green-deep);
+    margin: 28px 0 32px;
+  }
+  .poem span { display: block; }
+  .poem .accent { color: var(--gold); }
+
+  .btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .btn {
+    padding: 12px 22px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 700;
+    border: 2px solid var(--green-deep);
+    color: var(--green-deep);
+    transition: all .2s;
+  }
+  .btn:hover {
+    background: var(--green-deep);
+    color: var(--cream);
+  }
+  .btn.primary {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--green-deep);
+  }
+  .btn.primary:hover {
+    background: var(--gold-light);
+    border-color: var(--gold-light);
+  }
+
+  .explore {
+    background: var(--green-deep);
+    padding: 70px 6%;
+  }
+  .explore h2 {
+    text-align: center;
+    color: var(--gold);
+    font-size: clamp(24px, 2.6vw, 32px);
+    margin-bottom: 48px;
+  }
+  .explore-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 22px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .explore-card {
+    background: var(--cream);
+    border-radius: 12px;
+    padding: 26px 22px;
+    border-top: 4px solid var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .explore-card .icon { font-size: 28px; line-height: 1; }
+  .explore-card h3 {
+    font-size: 17px;
+    color: var(--green-deep);
+  }
+
+  .closing {
+    text-align: center;
+    padding: 70px 6%;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .closing h2 {
+    color: var(--green-deep);
+    font-size: clamp(22px, 2.4vw, 28px);
+    margin-bottom: 16px;
+  }
+  .closing p { font-size: 16px; }
+
+  footer {
+    text-align: center;
+    padding: 32px 6%;
+    font-size: 13px;
+    color: var(--green);
+    border-top: 1px solid rgba(27,122,94,.15);
+  }
+
+  @media (max-width: 720px) {
+    header { justify-content: center; text-align: center; }
+    .hero { flex-direction: column-reverse; padding-top: 0; }
+    .hero-image { max-width: 280px; }
+  }
+</style>
 </head>
 <body>
-  <h1>האקדמיה לגאונות בפשטות</h1>
+
+<header>
+  <div class="logo">
+    <img src="לוגו.jpg" alt="האקדמיה לגאונות בפשטות">
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#about">מי אני</a></li>
+      <li><a href="#explore">108 קודי הברקת</a></li>
+      <li><a href="#explore">לייזר לנשמה</a></li>
+      <li><a href="#explore">זוגיות משורש הנשמה</a></li>
+      <li><a href="#explore">רטריטים</a></li>
+      <li><a href="#explore">חנות ההיזכרות</a></li>
+      <li><a href="#contact">השארת פרטים</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <div class="eyebrow">ברוכים הבאים הביתה</div>
+    <p class="lead">יש מקומות שאליהם מגיעים. ויש מקומות שחוזרים אליהם.</p>
+    <p class="lead small">האקדמיה לגאונות בפשטות נולדה מתוך ההבנה שלא באנו לעולם כדי לתקן את עצמנו, אלא כדי להיזכר - במתנות, באהבה, בגאונות שאין עליה תחרות, במי שאנחנו.</p>
+
+    <p class="poem">
+      <span>כשהנשמה נזכרת במי שהיא,</span>
+      <span class="accent">הגאונות נובעת,</span>
+      <span>השמחה מתפרצת,</span>
+      <span>והאדם חוזר הביתה לעצמו.</span>
+    </p>
+
+    <div class="btn-row">
+      <a class="btn primary" href="#explore">מסע ההיזכרות - 108 קודי הברקת</a>
+      <a class="btn" href="#about">הכירו את בת שבע</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <div class="frame">
+      <img src="תמונת פורטרט.jpg" alt="בת שבע צור">
+    </div>
+  </div>
+</section>
+
+<section class="explore" id="explore">
+  <h2>מה תמצאו כאן?</h2>
+  <div class="explore-grid">
+    <a class="explore-card" href="#"><span class="icon">👑</span><h3>108 קודי הברקת</h3></a>
+    <a class="explore-card" href="#"><span class="icon">💚</span><h3>לייזר לנשמה</h3></a>
+    <a class="explore-card" href="#"><span class="icon">💕</span><h3>זוגיות משורש הנשמה</h3></a>
+    <a class="explore-card" href="#"><span class="icon">🌀</span><h3>סדנת מטוטלת ופירמידות אורגונייט</h3></a>
+    <a class="explore-card" href="#"><span class="icon">🏡</span><h3>טיהורי בתים ומרחבים</h3></a>
+    <a class="explore-card" href="#"><span class="icon">🌍</span><h3>רטריטים בעקבות קריאת הנשמה</h3></a>
+    <a class="explore-card" href="#"><span class="icon">💧</span><h3>מי מימן - המים שמזכירים מבפנים</h3></a>
+    <a class="explore-card" href="#"><span class="icon">🎙️</span><h3>פודקאסט</h3></a>
+    <a class="explore-card" href="#"><span class="icon">✨</span><h3>חנות ההיזכרות</h3></a>
+  </div>
+</section>
+
+<section class="closing" id="about">
+  <h2>האקדמיה לגאונות בפשטות - הבית שלך להיזכרות</h2>
+  <p>כי בסופו של דבר, לא באנו לעולם כדי להיות מישהו אחר. באנו להיזכר.</p>
+</section>
+
+<footer id="contact">
+  &copy; 2026 האקדמיה לגאונות בפשטות | בת שבע צור
+</footer>
+
 </body>
 </html>
