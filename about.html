@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מי אני - בת שבע צור | האקדמיה לגאונות בפשטות</title>
+<style>
+  :root {
+    --gold: #C9A227;
+    --gold-light: #E3C766;
+    --green-deep: #0F3D30;
+    --green: #1B7A5E;
+    --cream: #FBF8F1;
+    --text: #22301F;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Assistant', Arial, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  a { text-decoration: none; color: inherit; }
+  ul { list-style: none; }
+  img { max-width: 100%; display: block; }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    padding: 18px 6%;
+    background: var(--green-deep);
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+  }
+  nav ul { display: flex; flex-wrap: wrap; gap: 26px; justify-content: center; }
+  nav a { font-size: 14px; font-weight: 700; color: var(--cream); }
+  nav a:hover { color: var(--gold-light); }
+
+  .hero {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    padding: 60px 6%;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hero-image { flex: 1; min-width: 260px; max-width: 340px; }
+  .hero-image .frame {
+    aspect-ratio: 4/5;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--green-deep);
+  }
+  .hero-image img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-text { flex: 1.3; min-width: 300px; }
+  .hero-text .eyebrow { color: var(--gold); font-weight: 700; margin-bottom: 8px; }
+  .hero-text h1 { font-size: clamp(28px, 3.2vw, 40px); color: var(--green-deep); margin-bottom: 18px; }
+  .hero-text p { margin-bottom: 14px; font-size: 17px; }
+
+  .story {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 20px 6% 70px;
+  }
+  .story p { margin-bottom: 16px; font-size: 17px; }
+  .story .infinity { color: var(--gold); font-weight: 700; }
+
+  .facts {
+    background: var(--green-deep);
+    padding: 70px 6%;
+  }
+  .facts h2 {
+    text-align: center;
+    color: var(--gold);
+    font-size: clamp(24px, 2.6vw, 30px);
+    margin-bottom: 44px;
+  }
+  .fact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .fact-card {
+    background: var(--cream);
+    border-radius: 12px;
+    padding: 24px 22px;
+    border-top: 4px solid var(--gold);
+  }
+  .fact-card .num { color: var(--gold); font-weight: 700; font-size: 14px; margin-bottom: 8px; }
+  .fact-card h3 { font-size: 17px; color: var(--green-deep); margin-bottom: 10px; }
+  .fact-card p { font-size: 14px; opacity: .9; }
+
+  .cta {
+    text-align: center;
+    padding: 60px 6%;
+  }
+  .btn {
+    display: inline-block;
+    padding: 12px 26px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 700;
+    background: var(--gold);
+    color: var(--green-deep);
+  }
+  .btn:hover { background: var(--gold-light); }
+
+  footer {
+    text-align: center;
+    padding: 22px 6%;
+    font-size: 13px;
+    color: var(--cream);
+    background: var(--green-deep);
+    border-top: 1px solid rgba(251,248,241,.15);
+  }
+
+  @media (max-width: 720px) {
+    .hero { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <ul>
+      <li><a href="index.html#explore">מסע היזכרות</a></li>
+      <li><a href="index.html#explore">טיפולים</a></li>
+      <li><a href="index.html#explore">קורסים</a></li>
+      <li><a href="about.html">מי אני?</a></li>
+      <li><a href="index.html#contact">צור קשר</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-image">
+    <div class="frame">
+      <img src="תמונת פורטרט.jpg" alt="בת שבע צור">
+    </div>
+  </div>
+  <div class="hero-text">
+    <div class="eyebrow">מי אני?</div>
+    <h1>בת שבע סילביה צור</h1>
+    <p>אם נשב יחד לקפה, כנראה שלא אתחיל ברשימת התעודות שלי.</p>
+    <p>אני אישה שאוהבת את החיים. אוהבת אנשים. אוהבת ללמוד. אוהבת לצחוק. אוהבת לטייל. ואוהבת לראות אנשים נזכרים במתנות שכבר קיימות בהם.</p>
+  </div>
+</section>
+
+<section class="story">
+  <p>עברתי עשרות קורסים, הכשרות והסמכות. ליוויתי אלפי תלמידים. זכיתי לראות מאסטרים ומורות שנולדו מתוך הסדנאות שלי.</p>
+  <p>ועדיין, אני מרגישה תלמידה של החיים. ככל שאני לומדת יותר, אני מגלה כמה עוד יש לגלות.</p>
+  <p><span class="infinity">ה-0 הוא אינסוף.</span> ואחד אלוהינו, שמנחה את דרכי.</p>
+</section>
+
+<section class="facts">
+  <h2>7 דברים שאולי לא ידעתם על בת שבע</h2>
+  <div class="fact-grid">
+    <div class="fact-card">
+      <div class="num">1</div>
+      <h3>הכרתי את אלי פעמיים</h3>
+      <p>פעם אחת בטירונות. ופעם שנייה, יותר משנה אחר כך, בטלפון. כנראה שהחיים רצו לוודא שלא נפספס זה את זו.</p>
+    </div>
+    <div class="fact-card">
+      <div class="num">2</div>
+      <h3>אני רומנייה שמבינה תימנית</h3>
+      <p>השכנה שלנו הייתה חברה של אמא של אלי. היא דיברה אליי בתימנית, אני עניתי בעברית. וככה, בלי לדעת, החיים התחילו להכין אותי למשפחת צור הרבה לפני שפגשתי את אלי.</p>
+    </div>
+    <div class="fact-card">
+      <div class="num">3</div>
+      <h3>פעם קראו לנו בן סימון</h3>
+      <p>ולכן קיבלנו לא מעט הזמנות לכנסים של יוצאי מרוקו. רק שהיה פרט קטן - אנחנו בכלל רומנים.</p>
+    </div>
+    <div class="fact-card">
+      <div class="num">4</div>
+      <h3>הייתי ממפוני ימית</h3>
+      <p>ולאחר מכן חייתי כ-40 שנה בעוטף. למדתי שבית הוא לא מקום. בית הוא האנשים שאנחנו אוהבים.</p>
+    </div>
+    <div class="fact-card">
+      <div class="num">5</div>
+      <h3>אני מצהירה בפומבי שאני אוהבת את אלי</h3>
+      <p>גם אחרי יותר מחמישים שנות נישואין, בלי להתבייש. כי אהבה היא לא דבר מובן מאליו.</p>
+    </div>
+    <div class="fact-card">
+      <div class="num">6</div>
+      <h3>אני גאה בשבט שלנו</h3>
+      <p>ארבעה ילדים. עשרה נכדים. והמון אהבה, צחוק, חיבוקים ושמחה.</p>
+    </div>
+    <div class="fact-card">
+      <div class="num">7</div>
+      <h3>אם יש משהו שאני רוצה שיזכרו עליי</h3>
+      <p>לא כמה קורסים עברתי, לא כמה אנשים ליוויתי - אלא דבר אחד: שאהבתי. את הבורא. את החיים. את המשפחה. ואת אלי.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <a class="btn" href="index.html#contact">רוצה להיזכר? השאירי פרטים</a>
+</section>
+
+<footer>
+  &copy; 2026 האקדמיה לגאונות בפשטות | בת שבע צור
+</footer>
+
+</body>
+</html>
