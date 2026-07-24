@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>תטא הילינג | האקדמיה לגאונות בפשטות</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=David+Libre:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A227; --gold-light: #E3C766; --green-deep: #0F3D30; --green: #1B7A5E;
+    --cream: #FBF8F1; --card: #FFFDF9; --text: #22301F;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'David Libre', 'Assistant', Arial, sans-serif;
+    background: radial-gradient(rgba(201,162,39,.10) 1.5px, transparent 1.5px), var(--cream);
+    background-size: 26px 26px;
+    color: var(--text); line-height: 1.7;
+  }
+  a { text-decoration: none; color: inherit; }
+  ul { list-style: none; }
+  .wrap { padding: 60px 6%; }
+  h2 { text-align: center; color: var(--green-deep); font-size: clamp(24px, 2.6vw, 32px); margin-bottom: 18px; }
+  header {
+    display: flex; align-items: center; justify-content: center; gap: 32px;
+    padding: 18px 6%; background: var(--green-deep); flex-wrap: wrap; position: sticky; top: 0; z-index: 20;
+  }
+  nav ul { display: flex; flex-wrap: wrap; gap: 26px; justify-content: center; }
+  nav a { font-size: 14px; font-weight: 700; color: var(--cream); }
+  nav a:hover { color: var(--gold-light); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px; padding: 12px 24px; border-radius: 999px;
+    font-size: 14px; font-weight: 700; border: 2px solid var(--green-deep); color: var(--green-deep);
+    transition: all .2s; box-shadow: 0 2px 10px rgba(15,61,48,.08);
+  }
+  .btn:hover { background: var(--green-deep); color: var(--cream); transform: translateY(-2px); }
+  .btn.primary { background: var(--gold); border-color: var(--gold); color: var(--green-deep); }
+  .btn.primary:hover { background: var(--gold-light); border-color: var(--gold-light); }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 26px; }
+  .hero { text-align: center; max-width: 640px; margin: 0 auto; }
+  .hero .eyebrow { color: var(--gold); font-weight: 700; margin-bottom: 10px; font-size: 15px; }
+  .hero h1 { font-size: clamp(30px, 3.6vw, 44px); color: var(--green-deep); margin-bottom: 22px; }
+  .card {
+    max-width: 640px; margin: 0 auto; border-radius: 24px; padding: 48px 40px; text-align: center;
+    box-shadow: 0 12px 32px rgba(15,61,48,.10); background: var(--card); border: 1px solid rgba(15,61,48,.08);
+  }
+  .placeholder-note { text-align: center; font-size: 13px; color: var(--green); opacity: .75; margin-bottom: 16px; font-style: italic; }
+  .contact-card {
+    max-width: 480px; margin: 0 auto; background: var(--green-deep); border-radius: 24px; padding: 48px 36px;
+    text-align: center; box-shadow: 0 12px 32px rgba(15,61,48,.12);
+  }
+  .contact-card h2 { color: var(--gold); }
+  .contact-form { margin-top: 20px; display: flex; flex-direction: column; gap: 14px; }
+  .contact-form input, .contact-form textarea { padding: 12px 16px; border-radius: 8px; border: none; font-family: inherit; font-size: 15px; }
+  .contact-form textarea { min-height: 90px; resize: vertical; }
+  .contact-form button {
+    padding: 13px; border-radius: 999px; border: none; background: var(--gold); color: var(--green-deep);
+    font-weight: 700; font-size: 15px; cursor: pointer; transition: all .2s;
+  }
+  .contact-form button:hover { background: var(--gold-light); transform: translateY(-2px); }
+  footer {
+    text-align: center; padding: 22px 6%; font-size: 13px; color: var(--cream);
+    background: var(--green-deep); border-top: 1px solid rgba(251,248,241,.15);
+  }
+  footer .tagline { white-space: nowrap; overflow-x: auto; font-size: clamp(12px, 2.4vw, 16px); font-weight: 700; color: var(--gold-light); margin-bottom: 8px; }
+  @media (max-width: 600px) { .card, .contact-card { padding: 36px 22px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <ul>
+      <li><a href="index.html">← חזרה לעמוד הראשי</a></li>
+      <li><a href="masa-hizkarut.html">מסע היזכרות</a></li>
+      <li><a href="tipulim.html">טיפולים</a></li>
+      <li><a href="tihur-batim.html">טיהור בתים ומרחבים</a></li>
+      <li><a href="kursim.html">קורסים והכשרות</a></li>
+      <li><a href="about.html">מי אני?</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="eyebrow">הכשרה</div>
+    <h1>תטא הילינג</h1>
+  </section>
+</div>
+
+<div class="wrap" style="padding-top:0">
+  <div class="card">
+    <p class="placeholder-note">(התוכן המלא לעמוד הזה יתווסף בהמשך)</p>
+    <div class="btn-row">
+      <a class="btn primary" href="#contact">השארת פרטים</a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap" id="contact">
+  <div class="contact-card">
+    <h2>השארת פרטים</h2>
+    <form class="contact-form">
+      <input type="text" placeholder="שם מלא" required>
+      <input type="tel" placeholder="טלפון" required>
+      <input type="email" placeholder="אימייל">
+      <textarea placeholder="ספרי לי קצת על מה שמעניין אותך"></textarea>
+      <button type="submit">שליחה</button>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <p class="tagline">האקדמיה לגאונות בפשטות - הבית שלך להיזכרות</p>
+  &copy; 2026 האקדמיה לגאונות בפשטות | בת שבע צור
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>קורסים והכשרות | האקדמיה לגאונות בפשטות</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=David+Libre:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A227; --gold-light: #E3C766; --green-deep: #0F3D30; --green: #1B7A5E;
+    --cream: #FBF8F1; --card: #FFFDF9; --text: #22301F;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'David Libre', 'Assistant', Arial, sans-serif;
+    background: radial-gradient(rgba(201,162,39,.10) 1.5px, transparent 1.5px), var(--cream);
+    background-size: 26px 26px;
+    color: var(--text); line-height: 1.7;
+  }
+  a { text-decoration: none; color: inherit; }
+  ul { list-style: none; }
+  .wrap { padding: 60px 6%; }
+  h2 { text-align: center; color: var(--green-deep); font-size: clamp(24px, 2.6vw, 32px); margin-bottom: 18px; }
+  header {
+    display: flex; align-items: center; justify-content: center; gap: 32px;
+    padding: 18px 6%; background: var(--green-deep); flex-wrap: wrap; position: sticky; top: 0; z-index: 20;
+  }
+  nav ul { display: flex; flex-wrap: wrap; gap: 26px; justify-content: center; }
+  nav a { font-size: 14px; font-weight: 700; color: var(--cream); }
+  nav a:hover { color: var(--gold-light); }
+  .hero { text-align: center; max-width: 640px; margin: 0 auto; }
+  .hero .eyebrow { color: var(--gold); font-weight: 700; margin-bottom: 10px; font-size: 15px; }
+  .hero h1 { font-size: clamp(30px, 3.6vw, 44px); color: var(--green-deep); margin-bottom: 10px; }
+  .hero p { font-size: 17px; }
+
+  .course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 22px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .course-card {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 36px 26px;
+    text-align: center;
+    border-top: 4px solid var(--gold);
+    box-shadow: 0 10px 26px rgba(15,61,48,.08);
+    transition: transform .2s;
+  }
+  .course-card:hover { transform: translateY(-4px); }
+  .course-card h3 { font-size: 19px; color: var(--green-deep); margin-bottom: 12px; }
+  .course-card span.link {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  footer {
+    text-align: center; padding: 22px 6%; font-size: 13px; color: var(--cream);
+    background: var(--green-deep); border-top: 1px solid rgba(251,248,241,.15);
+  }
+  footer .tagline { white-space: nowrap; overflow-x: auto; font-size: clamp(12px, 2.4vw, 16px); font-weight: 700; color: var(--gold-light); margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <ul>
+      <li><a href="index.html">← חזרה לעמוד הראשי</a></li>
+      <li><a href="masa-hizkarut.html">מסע היזכרות</a></li>
+      <li><a href="tipulim.html">טיפולים</a></li>
+      <li><a href="tihur-batim.html">טיהור בתים ומרחבים</a></li>
+      <li><a href="kursim.html">קורסים והכשרות</a></li>
+      <li><a href="about.html">מי אני?</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="eyebrow">קורסים והכשרות</div>
+    <h1>ללמוד. להעמיק. להיזכר.</h1>
+    <p>ההכשרות והסדנאות שאפשר ללמוד באקדמיה</p>
+  </section>
+</div>
+
+<div class="wrap" style="padding-top:0">
+  <div class="course-grid">
+    <a class="course-card" href="theta-healing.html">
+      <h3>תטא הילינג</h3>
+      <span class="link">לפרטים ←</span>
+    </a>
+    <a class="course-card" href="reiki.html">
+      <h3>רייקי 1+2</h3>
+      <span class="link">לפרטים ←</span>
+    </a>
+    <a class="course-card" href="matutelet-orgonite.html">
+      <h3>סדנת מטוטלת ואורגונייט</h3>
+      <span class="link">לפרטים ←</span>
+    </a>
+    <a class="course-card" href="zugiyut-shoresh.html">
+      <h3>זוגיות משורש הנשמה</h3>
+      <span class="link">לפרטים ←</span>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <p class="tagline">האקדמיה לגאונות בפשטות - הבית שלך להיזכרות</p>
+  &copy; 2026 האקדמיה לגאונות בפשטות | בת שבע צור
+</footer>
+
+</body>
+</html>
