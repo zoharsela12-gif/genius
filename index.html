@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>האקדמיה לגאונות בפשטות | בת שבע צור</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
 <style>
   :root {
     --gold: #C9A227;
@@ -19,7 +22,7 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    font-family: 'Assistant', Arial, sans-serif;
+    font-family: 'Fraunces', 'Assistant', Arial, sans-serif;
     background: var(--cream);
     color: var(--text);
     line-height: 1.65;
@@ -82,18 +85,28 @@
 
   .btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
   .btn {
-    padding: 12px 22px;
+    padding: 10px 22px;
     border-radius: 999px;
     font-size: 14px;
     font-weight: 700;
     border: 2px solid var(--green-deep);
     color: var(--green-deep);
     transition: all .2s;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
   }
   .btn:hover { background: var(--green-deep); color: var(--cream); }
   .btn.primary { background: var(--gold); border-color: var(--gold); color: var(--green-deep); }
   .btn.primary:hover { background: var(--gold-light); border-color: var(--gold-light); }
+  .btn-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 2px rgba(15,61,48,.15);
+  }
 
   /* CAROUSEL */
   .explore { background: var(--green-deep); }
@@ -283,13 +296,12 @@
       <span>והאדם חוזר הביתה לעצמו.</span>
     </p>
     <div class="btn-row">
-      <a class="btn primary" href="#explore">מסע ההיזכרות - קודי הברקת</a>
+      <a class="btn primary" href="#explore"><img src="לוגו 108.jpg" alt="" class="btn-icon">מסע ההיזכרות - קודי הברקת</a>
     </div>
   </div>
 </section>
 
 <section class="explore" id="explore">
-  <img src="לוגו 108.jpg" alt="מסע ההיזכרות" style="width:110px;border-radius:12px;margin:0 auto 24px;">
   <h2>מה תמצאו כאן?</h2>
   <p class="sub">כל המסלולים, הסדנאות וההכשרות שדרכן אפשר ללמוד, לצמוח ולהיזכר במי שאת</p>
   <div class="carousel">
