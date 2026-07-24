@@ -124,16 +124,6 @@
   .card.dark { background: var(--green-deep); color: var(--cream); }
   .card.dark h2 { color: var(--gold); }
   .card.light { background: var(--card); border: 1px solid rgba(15,61,48,.08); }
-  .card .icon-badge {
-    width: 56px; height: 56px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 26px;
-    margin: 0 auto 18px;
-    background: var(--gold);
-    color: var(--green-deep);
-  }
-  .card.light .icon-badge { background: var(--green-deep); color: var(--gold); }
   .card p { font-size: 17px; margin-bottom: 8px; }
 
   /* COMING SOON CARD */
@@ -180,7 +170,6 @@
     padding: 26px 16px;
     border-top: 4px solid var(--gold);
   }
-  .include-card .emoji { font-size: 24px; margin-bottom: 8px; }
   .include-card .count { font-size: 30px; font-weight: 700; color: var(--green-deep); }
   .include-card .label { font-size: 14px; margin-top: 6px; }
   .includes-card .tagline { color: var(--cream); opacity: .9; font-size: 16px; }
@@ -287,7 +276,6 @@
 
 <div class="wrap" style="padding-top:0">
   <div class="card dark">
-    <div class="icon-badge">👑</div>
     <h2>אז מה מחכה לך כאן?</h2>
     <p>מסע ההיזכרות - מסע של כשלושה חודשים.</p>
     <p>מפגשים. תרגולים. קהילה. 108 קודי הברקת.</p>
@@ -304,7 +292,6 @@
 
 <div class="wrap" style="padding-top:0">
   <div class="card light">
-    <div class="icon-badge">💚</div>
     <h2>מאפשרות קודי הברקת</h2>
     <p>העמקה. תרגול. חיים עם הקודים. קהילת המשך.</p>
     <p>למי שמרגישה שהמסע היה רק ההתחלה.</p>
@@ -320,7 +307,6 @@
 
 <div class="wrap" style="padding-top:0">
   <div class="card dark">
-    <div class="icon-badge">✨</div>
     <h2>מאסטר בקודי הברקת</h2>
     <p>לנשים שמרגישות שהגיע הזמן להעביר הלאה.</p>
     <p>להחזיק מרחבים. ללוות. ולהדליק אור אצל אחרות.</p>
@@ -336,8 +322,7 @@
 
 <div class="wrap" style="padding-top:0">
   <div class="card soon">
-    <div class="soon-badge">🔜 בקרוב</div>
-    <div class="icon-badge">💻</div>
+    <div class="soon-badge">בקרוב</div>
     <h2>קורס דיגיטלי</h2>
     <p>כי לא כולן גרות ליד חדרה. ולא כולן פנויות באותו יום.</p>
     <p>והחדשות הטובות? הנשמה לא מכירה בפקקים.</p>
@@ -352,9 +337,9 @@
   <div class="includes-card">
     <h2>ומה כוללים 108 קודי הברקת?</h2>
     <div class="include-grid">
-      <div class="include-card"><div class="emoji">🌊</div><div class="count">55</div><div class="label">שערי הנביעה</div></div>
-      <div class="include-card"><div class="emoji">🃏</div><div class="count">40</div><div class="label">קלפי האלדרס</div></div>
-      <div class="include-card"><div class="emoji">⭐</div><div class="count">13</div><div class="label">קודי העל</div></div>
+      <div class="include-card"><div class="count">55</div><div class="label">שערי הנביעה</div></div>
+      <div class="include-card"><div class="count">40</div><div class="label">קלפי האלדרס</div></div>
+      <div class="include-card"><div class="count">13</div><div class="label">קודי העל</div></div>
     </div>
     <p class="tagline">ביחד הם יוצרים דרך. לא תיאוריה. דרך חיים.</p>
   </div>
