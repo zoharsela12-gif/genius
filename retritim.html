@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ריטריטים ומסעות | האקדמיה לגאונות בפשטות</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=David+Libre:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A227; --gold-light: #E3C766; --green-deep: #0F3D30; --green: #1B7A5E;
+    --blue: #2E6FBA; --turquoise: #2FB8B0;
+    --cream: #FBF8F1; --card: #FFFDF9; --text: #22301F;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'David Libre', 'Assistant', Arial, sans-serif;
+    background: radial-gradient(rgba(201,162,39,.10) 1.5px, transparent 1.5px), var(--cream);
+    background-size: 26px 26px;
+    color: var(--text); line-height: 1.7;
+  }
+  a { text-decoration: none; color: inherit; }
+  ul { list-style: none; }
+  img { max-width: 100%; display: block; }
+  .wrap { padding: 60px 6%; }
+  h2 { text-align: center; color: var(--green-deep); font-size: clamp(24px, 2.6vw, 32px); margin-bottom: 18px; }
+
+  header {
+    display: flex; align-items: center; justify-content: center; gap: 32px;
+    padding: 18px 6%; background: var(--green-deep); flex-wrap: wrap; position: sticky; top: 0; z-index: 20;
+  }
+  nav ul { display: flex; flex-wrap: wrap; gap: 26px; justify-content: center; }
+  nav a { font-size: 14px; font-weight: 700; color: var(--cream); }
+  nav a:hover { color: var(--gold-light); }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px; padding: 12px 24px; border-radius: 999px;
+    font-size: 14px; font-weight: 700; border: 2px solid var(--green-deep); color: var(--green-deep);
+    transition: all .2s; box-shadow: 0 2px 10px rgba(15,61,48,.08);
+  }
+  .btn:hover { background: var(--green-deep); color: var(--cream); transform: translateY(-2px); }
+  .btn.primary { background: var(--gold); border-color: var(--gold); color: var(--green-deep); }
+  .btn.primary:hover { background: var(--gold-light); border-color: var(--gold-light); }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 26px; }
+
+  .divider {
+    display: flex; align-items: center; justify-content: center; gap: 10px; margin: 0 auto; max-width: 200px;
+  }
+  .divider span { height: 1px; flex: 1; background: rgba(201,162,39,.4); }
+  .divider .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex: none; }
+
+  /* HERO */
+  .hero { text-align: center; max-width: 660px; margin: 0 auto; }
+  .hero h1 { font-size: clamp(28px, 3.4vw, 40px); color: var(--green-deep); margin-bottom: 20px; }
+  .hero p { font-size: 18px; margin-bottom: 8px; }
+  .hero .call { font-weight: 700; color: var(--gold); margin: 6px 0; }
+
+  /* CARD */
+  .card {
+    max-width: 720px; margin: 0 auto; border-radius: 24px; padding: 44px 40px; text-align: center;
+    box-shadow: 0 12px 32px rgba(15,61,48,.10);
+  }
+  .card.dark { background: var(--green-deep); color: var(--cream); }
+  .card.dark h2 { color: var(--gold); }
+  .card.light { background: var(--card); border: 1px solid rgba(15,61,48,.08); }
+  .card p { font-size: 17px; margin-bottom: 8px; }
+
+  /* MAP */
+  .legend {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 18px;
+    margin: 20px 0 24px; font-size: 13px; font-weight: 600;
+  }
+  .legend .dot-key { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-inline-end: 6px; vertical-align: middle; }
+  #worldMap { height: 460px; max-width: 100%; border-radius: 14px; overflow: hidden; z-index: 1; }
+  .glow { width: 16px; height: 16px; border-radius: 50%; box-shadow: 0 0 0 0 rgba(201,162,39,.6); animation: pulse 2.2s infinite; border: 2px solid var(--cream); }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(201,162,39,.55); } 70% { box-shadow: 0 0 0 14px rgba(201,162,39,0); } 100% { box-shadow: 0 0 0 0 rgba(201,162,39,0); } }
+  .g-gold { background: var(--gold); }
+  .g-blue { background: var(--blue); box-shadow: 0 0 0 0 rgba(46,111,186,.6); animation-name: pulseBlue; }
+  .g-turq { background: var(--turquoise); box-shadow: 0 0 0 0 rgba(47,184,176,.6); animation-name: pulseTurq; }
+  @keyframes pulseBlue { 0% { box-shadow: 0 0 0 0 rgba(46,111,186,.55);} 70% { box-shadow: 0 0 0 14px rgba(46,111,186,0);} 100% { box-shadow: 0 0 0 0 rgba(46,111,186,0);} }
+  @keyframes pulseTurq { 0% { box-shadow: 0 0 0 0 rgba(47,184,176,.55);} 70% { box-shadow: 0 0 0 14px rgba(47,184,176,0);} 100% { box-shadow: 0 0 0 0 rgba(47,184,176,0);} }
+  .map-popup { font-size: 13px; max-width: 220px; }
+  .map-popup h3 { color: var(--green-deep); margin-bottom: 4px; }
+  .map-popup .gate { color: var(--gold); font-weight: 700; font-size: 12px; margin-bottom: 6px; display: block; }
+
+  /* STORY GRID */
+  .story-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 22px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .story-card {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 30px 26px;
+    border-top: 4px solid var(--gold);
+    box-shadow: 0 10px 26px rgba(15,61,48,.08);
+    position: relative;
+  }
+  .story-card .flag { font-size: 26px; margin-bottom: 10px; }
+  .story-card h3 { font-size: 18px; color: var(--green-deep); margin-bottom: 4px; }
+  .story-card .subtitle { font-size: 14px; color: var(--gold); font-weight: 700; margin-bottom: 12px; }
+  .story-card p { font-size: 15px; margin-bottom: 6px; }
+  .sold-out {
+    position: absolute; top: -10px; left: 20px;
+    background: var(--gold); color: var(--green-deep);
+    font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 999px;
+    letter-spacing: .5px;
+  }
+
+  /* FEATURE LIST */
+  .feature-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px;
+    max-width: 600px;
+    margin: 24px auto 0;
+    text-align: right;
+  }
+  .feature-list li { font-size: 15px; }
+  .closing-line { margin-top: 26px; font-weight: 700; color: var(--gold-light); }
+
+  footer {
+    text-align: center; padding: 22px 6%; font-size: 13px; color: var(--cream);
+    background: var(--green-deep); border-top: 1px solid rgba(251,248,241,.15);
+  }
+  footer .signature { font-size: 15px; font-weight: 700; color: var(--gold-light); margin-bottom: 6px; }
+  footer .tagline { white-space: nowrap; overflow-x: auto; font-size: clamp(12px, 2.4vw, 16px); font-weight: 700; color: var(--gold-light); margin-bottom: 8px; }
+
+  @media (max-width: 600px) { .card { padding: 34px 22px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <ul>
+      <li><a href="index.html">← חזרה לעמוד הראשי</a></li>
+      <li><a href="masa-hizkarut.html">מסע היזכרות</a></li>
+      <li><a href="tipulim.html">טיפולים</a></li>
+      <li><a href="kursim.html">קורסים והכשרות</a></li>
+      <li><a href="retritim.html">ריטריטים ומסעות</a></li>
+      <li><a href="about.html">מי אני?</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <h1>לאן נוסעים כשנזכרים?</h1>
+    <p>יש אנשים שאוספים מדינות.</p>
+    <p>אני אוספת היזכרויות.</p>
+    <p style="margin-top:14px">לאורך השנים גיליתי דבר מוזר.</p>
+    <p>המקומות הכי משמעותיים בחיי לא היו המקומות שתכננתי.</p>
+    <p>הם היו המקומות שקראו לי.</p>
+    <p>לפעמים הלחישה הייתה עדינה. לפעמים חזקה.</p>
+    <p>ולפעמים הרגשתי כאילו מקום שלם אומר לי:</p>
+    <p class="call">"בואי."</p>
+    <p>וכשהלב שמע, יצאתי.</p>
+    <p>ולפעמים יצאו איתי עוד נשמות שהרגישו בדיוק את אותה קריאה.</p>
+    <p style="font-weight:700;color:var(--green-deep)">כך נולדו מסעות ההיזכרות.</p>
+  </section>
+</div>
+
+<div class="wrap"><div class="divider"><span></span><div class="dot"></div><span></span></div></div>
+
+<div class="wrap" style="padding-top:0" id="map">
+  <div class="card dark">
+    <h2>🌍 מפת ההיזכרות</h2>
+    <p>באתר תמצאו מפת עולם אינטראקטיבית.</p>
+    <p>לא מפת טיולים. מפת סיפורים. מפת לב. מפת היזכרות.</p>
+    <p>על כל מקום אפשר יהיה ללחוץ, לראות תמונות, סרטונים, סיפורים, תובנות ורגעים שנחרטו בנשמה.</p>
+    <p style="margin-bottom:24px">וגם לגלות אילו שערים עוד מחכים להיפתח.</p>
+
+    <div class="legend">
+      <span><span class="dot-key" style="background:var(--gold)"></span>שערים שכבר נחוו</span>
+      <span><span class="dot-key" style="background:var(--blue)"></span>מקומות שמהם ייצאו רטריטים</span>
+      <span><span class="dot-key" style="background:var(--turquoise)"></span>מקומות שעוד לוחשים "אולי"</span>
+    </div>
+    <div id="worldMap"></div>
+  </div>
+</div>
+
+<div class="wrap"><div class="divider"><span></span><div class="dot"></div><span></span></div></div>
+
+<div class="wrap" style="padding-top:0">
+  <div class="story-grid">
+    <div class="story-card">
+      <div class="flag">🇷🇴</div>
+      <h3>רומניה</h3>
+      <div class="subtitle">המקום שבו חזרתי להיות סילביה</div>
+      <p>נולדתי ברומניה. אבל רק שנים רבות אחר כך חזרתי אליה.</p>
+      <p>ומה שחיכה לי שם לא היה רק נוף. ברומניה אספתי בחזרה את השם שאיתו נולדתי - סילביה.</p>
+      <p>כאילו חלק מהנשמה חיכה בסבלנות עד שאבוא לקחת אותו הביתה.</p>
+    </div>
+
+    <div class="story-card">
+      <div class="flag">🏔️</div>
+      <h3>שאסטה</h3>
+      <div class="subtitle">המקום שבו הזריחות שינו אותי</div>
+      <p>יש זריחות שאי אפשר להסביר. רק לבכות מולן.</p>
+      <p>בשאסטה פגשתי את הלהבה הסגולה בשיא עוצמתה. ושם, בין ההר, השקט והמורשת העתיקה של השבטים האינדיאנים, משהו בי נזכר.</p>
+      <p>יש חוויות שלא מסבירים. הן פשוט נשארות.</p>
+    </div>
+
+    <div class="story-card">
+      <div class="flag">🌺</div>
+      <h3>הוואי</h3>
+      <div class="subtitle">ארץ בראשית</div>
+      <p>הוואי הרגישה לי כמו העולם בתחילתו.</p>
+      <p>דולפינים. אוקיינוס אינסופי. טבע חי. ושמיים שנראים כאילו נפתחו לרווחה.</p>
+      <p>מקום של פליאה. של תמימות. של שמחת חיים.</p>
+    </div>
+
+    <div class="story-card">
+      <div class="flag">🇨🇷</div>
+      <h3>קוסטה ריקה</h3>
+      <div class="subtitle">המקום שעדיין לוחש לי</div>
+      <p>ריו פרלס. מעיין הנעורים. הייתי שם. ועד היום אני שומעת אותו.</p>
+      <p>כאילו המקום עצמו אומר: "בואי..."</p>
+      <p>יש מקומות שלא עוזבים אותך.</p>
+    </div>
+
+    <div class="story-card">
+      <div class="flag">🇮🇳</div>
+      <h3>הודו</h3>
+      <div class="subtitle">הקריאה שעדיין לא הסתיימה</div>
+      <p>כבר ביקרתי בהודו. אבל משהו בי יודע שעוד אשוב.</p>
+      <p>אולי לאיורוודה. אולי לריפוי. אולי פשוט כדי להאט.</p>
+      <p>יש מסעות שלא נגמרים.</p>
+    </div>
+
+    <div class="story-card">
+      <span class="sold-out">SOLD OUT</span>
+      <div class="flag">🇮🇹</div>
+      <h3>דמנהור</h3>
+      <div class="subtitle">כשהחלום הופך למציאות</div>
+      <p>כששמעתי לראשונה על דמנהור, משהו בי נדלק.</p>
+      <p>והיום? מסע היזכרות מספר 3 לדמנהור כבר מלא.</p>
+      <p>כי כשהשער נפתח, הנשמות מגיעות.</p>
+    </div>
+
+    <div class="story-card">
+      <div class="flag">🇪🇬</div>
+      <h3>מצרים</h3>
+      <div class="subtitle">המקום שבו הכל התחיל</div>
+      <p>שלוש פעמים הגעתי למצרים. וכל פעם מחדש הרגשתי כאילו אני חוזרת למקום מוכר.</p>
+      <p>יש מקומות שלא מבקרים בהם. יש מקומות שנזכרים בהם.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wrap"><div class="divider"><span></span><div class="dot"></div><span></span></div></div>
+
+<div class="wrap" style="padding-top:0">
+  <div class="card light">
+    <h2>🌿 ולא תמיד צריך לטוס</h2>
+    <p>לפעמים ההיזכרות מחכה קרוב.</p>
+    <p>בשמורת גדור. מול הים. בטבע. במקומות של שקט.</p>
+    <p>במקומות שבהם אפשר לראות אינסוף כוכבים. במקומות שבהם השמיים פתוחים לרווחה. במקומות שבהם אין רעש.</p>
+    <p>ואז קורה משהו יפה. הלבבות נפתחים. השיחות מעמיקות. הנשמה נושמת.</p>
+    <p style="font-weight:700">והביחד מזכיר לנו מי אנחנו.</p>
+  </div>
+</div>
+
+<div class="wrap"><div class="divider"><span></span><div class="dot"></div><span></span></div></div>
+
+<div class="wrap" style="padding-top:0">
+  <div class="card dark">
+    <h2>✨ מסעות שלא מופיעים בלוח השנה</h2>
+    <p>חלק מהמסעות נולדים שנה מראש. וחלק נולדים מתוך רגע של היזכרות.</p>
+    <p>לפעמים סוף שבוע. לפעמים יום אחד. לפעמים ערב. לפעמים קבוצה קטנה.</p>
+    <p>אני לא יודעת תמיד לאן נצא. אבל למדתי להקשיב.</p>
+    <p class="call">וכשהשער נפתח, אני פשוט אומרת: "בואו, יוצאים."</p>
+    <div class="btn-row">
+      <a class="btn primary" href="index.html#contact">השארת פרטים לעדכונים על מסעות</a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap"><div class="divider"><span></span><div class="dot"></div><span></span></div></div>
+
+<div class="wrap" style="padding-top:0">
+  <div class="card light">
+    <h2>🗺️ מפת ההיזכרות החיה</h2>
+    <ul class="feature-list">
+      <li>🌍 המקומות שבהם כבר נפתחו שערים</li>
+      <li>✨ המקומות שעדיין קוראים</li>
+      <li>📷 תמונות</li>
+      <li>🎥 סרטונים</li>
+      <li>❤️ סיפורים</li>
+      <li>🌿 רטריטים בארץ</li>
+      <li>✈️ מסעות בעולם</li>
+      <li>⭐ לילות של כוכבים</li>
+      <li>💙 רגעים שלא שוכחים</li>
+    </ul>
+    <p class="closing-line" style="color:var(--green-deep)">יש אנשים שנוסעים כדי לראות עולם.<br>ויש אנשים שנוסעים כדי להיזכר מי הם.</p>
+  </div>
+</div>
+
+<footer>
+  <p class="signature">בת שבע סילביה צור</p>
+  <p class="tagline">האקדמיה לגאונות בפשטות - הבית שלך להיזכרות</p>
+  &copy; 2026 האקדמיה לגאונות בפשטות | בת שבע צור
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const gates = [
+    { name: 'מצרים',     gate: 'שער החכמה העתיקה',   cat: 'g-gold', lat: 29.9773, lng: 31.1325,
+      detail: 'נזכרת בתודעת מאסטר תות. חכמה עתיקה שהוסתרה אלפי שנים. זכיתי, ואני זוכה לאפשר לאחרים להיזכר.' },
+    { name: 'הוואי',     gate: 'שער האהבה ללא תנאי', cat: 'g-gold', lat: 20.7967, lng: -156.3319,
+      detail: 'חיבור למקור. אהבה ללא תנאי. היזכרות עמוקה. הדולפינים הזכירו לי שמחה, תמימות וזרימה.' },
+    { name: 'שאסטה',     gate: 'שער השקט וההר',      cat: 'g-gold', lat: 41.4092, lng: -122.1949,
+      detail: 'מקום של עוצמה, טבע ודממה. הזמנה להקשיב פנימה.' },
+    { name: 'דמנהור',    gate: 'שער הקהילה והחזון',  cat: 'g-gold', lat: 45.4000, lng: 7.7000,
+      detail: 'מקום שהזכיר לי שאפשר לחלום, ליצור ולחיות אחרת. (מסע היזכרות מספר 3 - SOLD OUT)' },
+    { name: 'רומניה',    gate: 'שער השורשים',        cat: 'g-gold', lat: 45.9432, lng: 24.9668,
+      detail: 'ארץ הולדתי. חזרה הביתה. המקום שבו חזרתי להיות סילביה.' },
+    { name: 'הודו',      gate: 'הקריאה שעדיין לא הסתיימה', cat: 'g-gold', lat: 30.0869, lng: 78.2676,
+      detail: 'כבר ביקרתי בהודו. אבל משהו בי יודע שעוד אשוב - אולי לאיורוודה, אולי לריפוי, אולי פשוט כדי להאט.' },
+    { name: 'קוסטה ריקה', gate: 'שער ההתחדשות',      cat: 'g-blue', lat: 9.7489, lng: -83.7534,
+      detail: 'מעיין הנעורים והנצח. המקום קורא לי - ריו פרלס, המים, הטבע, החיים. רטריטים עתידיים ייצאו כאשר תגיע הקריאה.' },
+    { name: 'קפריסין',   gate: 'שער המנוחה והים',    cat: 'g-blue', lat: 35.1264, lng: 33.4299,
+      detail: 'מרחב של נשימה, שלווה והתחדשות.' },
+    { name: 'בולגריה',   gate: 'שער הפשטות והטבע',   cat: 'g-blue', lat: 42.7339, lng: 25.4858,
+      detail: 'אדמה, מים, קהילה ופשטות.' },
+    { name: 'פרו',       gate: 'שער המסתורין',       cat: 'g-turq', lat: -9.1900, lng: -75.0152,
+      detail: 'אולי - אם וכאשר תגיע הקריאה.' },
+    { name: 'יוון',      gate: 'שער השמחה וההתענגות', cat: 'g-turq', lat: 39.0742, lng: 21.8243,
+      detail: 'ים. שמחה. חברות. פשטות.' }
+  ];
+
+  const map = L.map('worldMap', { scrollWheelZoom: false, minZoom: 2 }).setView([25, 15], 2);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+    maxZoom: 18
+  }).addTo(map);
+
+  gates.forEach(g => {
+    const icon = L.divIcon({
+      className: '',
+      html: `<div class="glow ${g.cat}"></div>`,
+      iconSize: [16, 16],
+      iconAnchor: [8, 8]
+    });
+    const marker = L.marker([g.lat, g.lng], { icon }).addTo(map);
+    marker.bindTooltip(
+      `<div class="map-popup"><h3>${g.name}</h3><span class="gate">${g.gate}</span>${g.detail}</div>`,
+      { direction: 'top', offset: [0, -6] }
+    );
+  });
+</script>
+
+</body>
+</html>
