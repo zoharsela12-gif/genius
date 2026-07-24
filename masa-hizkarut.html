@@ -14,19 +14,23 @@
     --green-deep: #0F3D30;
     --green: #1B7A5E;
     --cream: #FBF8F1;
+    --card: #FFFDF9;
     --text: #22301F;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: 'David Libre', 'Assistant', Arial, sans-serif;
-    background: var(--cream);
+    background:
+      radial-gradient(rgba(201,162,39,.10) 1.5px, transparent 1.5px),
+      var(--cream);
+    background-size: 26px 26px;
     color: var(--text);
     line-height: 1.7;
   }
   a { text-decoration: none; color: inherit; }
   ul { list-style: none; }
   img { max-width: 100%; display: block; }
-  section { padding: 64px 6%; }
+  .wrap { padding: 60px 6%; }
   h2 {
     text-align: center;
     color: var(--green-deep);
@@ -61,85 +65,151 @@
     border: 2px solid var(--green-deep);
     color: var(--green-deep);
     transition: all .2s;
+    box-shadow: 0 2px 10px rgba(15,61,48,.08);
   }
-  .btn:hover { background: var(--green-deep); color: var(--cream); }
+  .btn:hover { background: var(--green-deep); color: var(--cream); transform: translateY(-2px); }
   .btn.primary { background: var(--gold); border-color: var(--gold); color: var(--green-deep); }
   .btn.primary:hover { background: var(--gold-light); border-color: var(--gold-light); }
-  .btn-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 24px; }
+  .btn.ghost { background: transparent; border-color: var(--cream); color: var(--cream); }
+  .btn.ghost:hover { background: var(--cream); color: var(--green-deep); }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 26px; }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0 auto;
+    max-width: 200px;
+  }
+  .divider span { height: 1px; flex: 1; background: rgba(201,162,39,.4); }
+  .divider .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex: none; }
 
   /* HERO */
   .hero {
     text-align: center;
     max-width: 720px;
     margin: 0 auto;
+    position: relative;
+    padding-top: 20px;
   }
-  .hero .eyebrow { color: var(--gold); font-weight: 700; margin-bottom: 10px; font-size: 15px; }
-  .hero h1 { font-size: clamp(30px, 3.6vw, 44px); color: var(--green-deep); margin-bottom: 22px; }
-  .hero p { font-size: 18px; margin-bottom: 10px; }
-  .hero p.pause { color: var(--gold); font-weight: 700; margin: 18px 0; }
-
-  /* DARK BLOCK (offering sections) */
-  .offer { background: var(--green-deep); }
-  .offer h2 { color: var(--gold); }
-  .offer .body { max-width: 640px; margin: 0 auto; text-align: center; color: var(--cream); }
-  .offer .body p { margin-bottom: 10px; font-size: 17px; }
-  .offer .wow {
-    margin-top: 20px;
+  .hero::before {
+    content: '108';
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: clamp(90px, 16vw, 180px);
     font-weight: 700;
-    color: var(--gold-light);
-    font-size: 18px;
+    color: rgba(201,162,39,.08);
+    z-index: -1;
+    line-height: 1;
+    white-space: nowrap;
   }
+  .hero .eyebrow { color: var(--gold); font-weight: 700; margin-bottom: 10px; font-size: 15px; letter-spacing: .5px; }
+  .hero h1 { font-size: clamp(32px, 4vw, 48px); color: var(--green-deep); margin-bottom: 26px; }
+  .hero p { font-size: 18px; margin-bottom: 10px; }
+  .hero p.pause { color: var(--gold); font-weight: 700; margin: 18px 0; font-size: 20px; }
+  .hero p.final { font-size: 20px; font-weight: 700; color: var(--green-deep); margin-top: 14px; }
 
-  /* LIGHT BLOCK */
-  .offer.light { background: var(--cream); }
-  .offer.light h2 { color: var(--green-deep); }
-  .offer.light .body { color: var(--text); }
-
-  .placeholder-note {
+  /* CARD SECTIONS */
+  .card {
+    max-width: 640px;
+    margin: 0 auto;
+    border-radius: 24px;
+    padding: 48px 40px;
     text-align: center;
-    font-size: 13px;
-    color: var(--green);
-    opacity: .75;
-    margin-bottom: 16px;
-    font-style: italic;
+    box-shadow: 0 12px 32px rgba(15,61,48,.10);
   }
+  .card.dark { background: var(--green-deep); color: var(--cream); }
+  .card.dark h2 { color: var(--gold); }
+  .card.light { background: var(--card); border: 1px solid rgba(15,61,48,.08); }
+  .card .icon-badge {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    margin: 0 auto 18px;
+    background: var(--gold);
+    color: var(--green-deep);
+  }
+  .card.light .icon-badge { background: var(--green-deep); color: var(--gold); }
+  .card p { font-size: 17px; margin-bottom: 8px; }
+
+  /* COMING SOON CARD */
+  .card.soon {
+    border: 2px dashed var(--gold);
+    background: repeating-linear-gradient(135deg, var(--card), var(--card) 14px, rgba(201,162,39,.05) 14px, rgba(201,162,39,.05) 28px);
+    position: relative;
+  }
+  .soon-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--gold);
+    color: var(--green-deep);
+    font-weight: 700;
+    font-size: 13px;
+    padding: 6px 18px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+    letter-spacing: .5px;
+  }
+  .card.soon p { opacity: .85; }
 
   /* INCLUDES */
-  .includes { background: var(--green-deep); text-align: center; }
-  .includes h2 { color: var(--gold); }
+  .includes-card {
+    max-width: 760px;
+    margin: 0 auto;
+    background: var(--green-deep);
+    border-radius: 24px;
+    padding: 48px 32px;
+    text-align: center;
+    box-shadow: 0 12px 32px rgba(15,61,48,.12);
+  }
+  .includes-card h2 { color: var(--gold); }
   .include-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 20px;
-    max-width: 800px;
-    margin: 36px auto 30px;
+    margin: 36px 0 30px;
   }
   .include-card {
-    background: var(--cream);
-    border-radius: 12px;
-    padding: 24px 16px;
+    background: var(--card);
+    border-radius: 16px;
+    padding: 26px 16px;
     border-top: 4px solid var(--gold);
   }
-  .include-card .count { font-size: 28px; font-weight: 700; color: var(--green-deep); }
+  .include-card .emoji { font-size: 24px; margin-bottom: 8px; }
+  .include-card .count { font-size: 30px; font-weight: 700; color: var(--green-deep); }
   .include-card .label { font-size: 14px; margin-top: 6px; }
-  .includes .tagline { color: var(--cream); opacity: .9; font-size: 16px; }
+  .includes-card .tagline { color: var(--cream); opacity: .9; font-size: 16px; }
 
   /* CLOSING */
   .closing { text-align: center; max-width: 640px; margin: 0 auto; }
-  .closing .q { font-size: 20px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; }
+  .closing .q { font-size: 22px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; }
+  .closing p { font-size: 17px; }
   .closing .words {
-    margin-top: 18px;
+    margin-top: 22px;
     font-weight: 700;
     color: var(--gold);
-    letter-spacing: .5px;
+    letter-spacing: 1px;
+    font-size: 18px;
   }
 
   /* CONTACT */
-  .contact { background: var(--green-deep); text-align: center; }
-  .contact h2 { color: var(--gold); }
+  .contact-card {
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--green-deep);
+    border-radius: 24px;
+    padding: 48px 36px;
+    text-align: center;
+    box-shadow: 0 12px 32px rgba(15,61,48,.12);
+  }
+  .contact-card h2 { color: var(--gold); }
   .contact-form {
-    max-width: 460px;
-    margin: 24px auto 0;
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     gap: 14px;
@@ -161,8 +231,9 @@
     font-weight: 700;
     font-size: 15px;
     cursor: pointer;
+    transition: all .2s;
   }
-  .contact-form button:hover { background: var(--gold-light); }
+  .contact-form button:hover { background: var(--gold-light); transform: translateY(-2px); }
 
   footer {
     text-align: center;
@@ -180,6 +251,10 @@
     color: var(--gold-light);
     margin-bottom: 8px;
   }
+
+  @media (max-width: 600px) {
+    .card, .includes-card, .contact-card { padding: 36px 22px; }
+  }
 </style>
 </head>
 <body>
@@ -196,97 +271,121 @@
   </nav>
 </header>
 
-<section class="hero">
-  <div class="eyebrow">מסע ההיזכרות</div>
-  <h1>108 קודי הברקת</h1>
-  <p>לא, זה לא עוד קלף.</p>
-  <p>זה בית שלם.</p>
-  <p class="pause">רגע…</p>
-  <p>מה זה בכלל 108 קודי הברקת?</p>
-  <p>אפשר להסביר. אבל האמת? יותר קל לחוות.</p>
-  <p>כי הקודים לא באו ללמד אותך להיות מישהי אחרת.</p>
-  <p><strong>הם באו להזכיר לך מי את.</strong></p>
-</section>
+<div class="wrap">
+  <section class="hero">
+    <div class="eyebrow">מסע ההיזכרות</div>
+    <h1>108 קודי הברקת</h1>
+    <p>לא, זה לא עוד קלף.</p>
+    <p>זה בית שלם.</p>
+    <p class="pause">רגע…</p>
+    <p>מה זה בכלל 108 קודי הברקת?</p>
+    <p>אפשר להסביר. אבל האמת? יותר קל לחוות.</p>
+    <p>כי הקודים לא באו ללמד אותך להיות מישהי אחרת.</p>
+    <p class="final">הם באו להזכיר לך מי את.</p>
+  </section>
+</div>
 
-<section class="offer">
-  <h2>אז מה מחכה לך כאן?</h2>
-  <div class="body">
+<div class="wrap" style="padding-top:0">
+  <div class="card dark">
+    <div class="icon-badge">👑</div>
+    <h2>אז מה מחכה לך כאן?</h2>
     <p>מסע ההיזכרות - מסע של כשלושה חודשים.</p>
     <p>מפגשים. תרגולים. קהילה. 108 קודי הברקת.</p>
-    <p class="wow">והמון רגעי: "וואו… איך שכחתי את זה?"</p>
+    <p style="margin-top:16px;font-weight:700;color:var(--gold-light)">והמון רגעי: "וואו… איך שכחתי את זה?"</p>
+    <div class="btn-row">
+      <a class="btn primary" href="#contact">השארת פרטים</a>
+    </div>
   </div>
-  <div class="btn-row">
-    <a class="btn primary" href="#contact">השארת פרטים</a>
-  </div>
-</section>
+</div>
 
-<section class="offer light">
-  <h2>מאפשרות קודי הברקת</h2>
-  <div class="body">
+<div class="wrap">
+  <div class="divider"><span></span><div class="dot"></div><span></span></div>
+</div>
+
+<div class="wrap" style="padding-top:0">
+  <div class="card light">
+    <div class="icon-badge">💚</div>
+    <h2>מאפשרות קודי הברקת</h2>
     <p>העמקה. תרגול. חיים עם הקודים. קהילת המשך.</p>
     <p>למי שמרגישה שהמסע היה רק ההתחלה.</p>
+    <div class="btn-row">
+      <a class="btn primary" href="#contact">מעניין אותי - השארת פרטים</a>
+    </div>
   </div>
-  <div class="btn-row">
-    <a class="btn primary" href="#contact">מעניין אותי - השארת פרטים</a>
-  </div>
-</section>
+</div>
 
-<section class="offer">
-  <h2>מאסטר בקודי הברקת</h2>
-  <div class="body">
+<div class="wrap">
+  <div class="divider"><span></span><div class="dot"></div><span></span></div>
+</div>
+
+<div class="wrap" style="padding-top:0">
+  <div class="card dark">
+    <div class="icon-badge">✨</div>
+    <h2>מאסטר בקודי הברקת</h2>
     <p>לנשים שמרגישות שהגיע הזמן להעביר הלאה.</p>
     <p>להחזיק מרחבים. ללוות. ולהדליק אור אצל אחרות.</p>
+    <div class="btn-row">
+      <a class="btn primary" href="#contact">ספרי לי עוד</a>
+    </div>
   </div>
-  <div class="btn-row">
-    <a class="btn primary" href="#contact">ספרי לי עוד</a>
-  </div>
-</section>
+</div>
 
-<section class="offer light">
-  <h2>קורס דיגיטלי</h2>
-  <p class="placeholder-note">(תוכן מורחב יתווסף כאן בהמשך)</p>
-  <div class="body">
+<div class="wrap">
+  <div class="divider"><span></span><div class="dot"></div><span></span></div>
+</div>
+
+<div class="wrap" style="padding-top:0">
+  <div class="card soon">
+    <div class="soon-badge">🔜 בקרוב</div>
+    <div class="icon-badge">💻</div>
+    <h2>קורס דיגיטלי</h2>
     <p>כי לא כולן גרות ליד חדרה. ולא כולן פנויות באותו יום.</p>
     <p>והחדשות הטובות? הנשמה לא מכירה בפקקים.</p>
     <p>אפשר ללמוד גם מהבית.</p>
+    <div class="btn-row">
+      <a class="btn primary" href="#contact">רוצה לדעת כשזה עולה - השאירי פרטים</a>
+    </div>
   </div>
-  <div class="btn-row">
-    <a class="btn primary" href="#contact">לרכישת המסע הדיגיטלי</a>
-  </div>
-</section>
+</div>
 
-<section class="includes">
-  <h2>ומה כוללים 108 קודי הברקת?</h2>
-  <div class="include-grid">
-    <div class="include-card"><div class="count">55</div><div class="label">שערי הנביעה</div></div>
-    <div class="include-card"><div class="count">40</div><div class="label">קלפי האלדרס</div></div>
-    <div class="include-card"><div class="count">13</div><div class="label">קודי העל</div></div>
+<div class="wrap">
+  <div class="includes-card">
+    <h2>ומה כוללים 108 קודי הברקת?</h2>
+    <div class="include-grid">
+      <div class="include-card"><div class="emoji">🌊</div><div class="count">55</div><div class="label">שערי הנביעה</div></div>
+      <div class="include-card"><div class="emoji">🃏</div><div class="count">40</div><div class="label">קלפי האלדרס</div></div>
+      <div class="include-card"><div class="emoji">⭐</div><div class="count">13</div><div class="label">קודי העל</div></div>
+    </div>
+    <p class="tagline">ביחד הם יוצרים דרך. לא תיאוריה. דרך חיים.</p>
   </div>
-  <p class="tagline">ביחד הם יוצרים דרך. לא תיאוריה. דרך חיים.</p>
-</section>
+</div>
 
-<section class="closing">
-  <p class="q">שאלה קטנה…</p>
-  <p>מה אם לא הגעת לכאן כדי ללמוד משהו חדש?</p>
-  <p>מה אם הגעת כדי להיזכר?</p>
-  <p class="words">נזכרות • מאפשרות • מנהיגות</p>
-  <div class="btn-row">
-    <a class="btn primary" href="#contact">להצטרפות למסע</a>
-    <a class="btn" href="#contact">לקורס הדיגיטלי</a>
-    <a class="btn" href="#contact">לקביעת שיחת היכרות</a>
+<div class="wrap">
+  <section class="closing">
+    <p class="q">שאלה קטנה…</p>
+    <p>מה אם לא הגעת לכאן כדי ללמוד משהו חדש?</p>
+    <p>מה אם הגעת כדי להיזכר?</p>
+    <p class="words">נזכרות • מאפשרות • מנהיגות</p>
+    <div class="btn-row">
+      <a class="btn primary" href="#contact">להצטרפות למסע</a>
+      <a class="btn" href="#contact">לקורס הדיגיטלי</a>
+      <a class="btn" href="#contact">לקביעת שיחת היכרות</a>
+    </div>
+  </section>
+</div>
+
+<div class="wrap" id="contact" style="padding-top:0">
+  <div class="contact-card">
+    <h2>השארת פרטים</h2>
+    <form class="contact-form">
+      <input type="text" placeholder="שם מלא" required>
+      <input type="tel" placeholder="טלפון" required>
+      <input type="email" placeholder="אימייל">
+      <textarea placeholder="באיזה חלק במסע ההיזכרות את מעוניינת?"></textarea>
+      <button type="submit">שליחה</button>
+    </form>
   </div>
-</section>
-
-<section class="contact" id="contact">
-  <h2>השארת פרטים</h2>
-  <form class="contact-form">
-    <input type="text" placeholder="שם מלא" required>
-    <input type="tel" placeholder="טלפון" required>
-    <input type="email" placeholder="אימייל">
-    <textarea placeholder="באיזה חלק במסע ההיזכרות את מעוניינת?"></textarea>
-    <button type="submit">שליחה</button>
-  </form>
-</section>
+</div>
 
 <footer>
   <p class="tagline">האקדמיה לגאונות בפשטות - הבית שלך להיזכרות</p>
