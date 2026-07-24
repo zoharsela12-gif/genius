@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>האקדמיה לגאונות בפשטות | בת שבע צור</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
   :root {
     --gold: #C9A227;
@@ -158,29 +159,21 @@
     font-weight: 600;
   }
   .legend .dot-key { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-inline-end: 6px; vertical-align: middle; }
-  .points {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 18px;
+
+  #worldMap {
+    height: 480px;
     max-width: 1100px;
     margin: 0 auto;
-  }
-  .point summary {
-    list-style: none;
-    cursor: pointer;
-    background: var(--green-deep);
     border-radius: 14px;
-    padding: 22px 18px;
-    text-align: center;
-    position: relative;
+    overflow: hidden;
+    z-index: 1;
   }
-  .point summary::-webkit-details-marker { display: none; }
-  .point .glow {
+  .glow {
     width: 16px; height: 16px;
     border-radius: 50%;
-    margin: 0 auto 12px;
     box-shadow: 0 0 0 0 rgba(201,162,39,.6);
     animation: pulse 2.2s infinite;
+    border: 2px solid var(--cream);
   }
   @keyframes pulse {
     0%   { box-shadow: 0 0 0 0 rgba(201,162,39,.55); }
@@ -192,17 +185,11 @@
   .g-turq { background: var(--turquoise); box-shadow: 0 0 0 0 rgba(47,184,176,.6); animation-name: pulseTurq; }
   @keyframes pulseBlue { 0% { box-shadow: 0 0 0 0 rgba(46,111,186,.55);} 70% { box-shadow: 0 0 0 14px rgba(46,111,186,0);} 100% { box-shadow: 0 0 0 0 rgba(46,111,186,0);} }
   @keyframes pulseTurq { 0% { box-shadow: 0 0 0 0 rgba(47,184,176,.55);} 70% { box-shadow: 0 0 0 14px rgba(47,184,176,0);} 100% { box-shadow: 0 0 0 0 rgba(47,184,176,0);} }
-  .point summary h3 { color: var(--cream); font-size: 17px; margin-bottom: 4px; }
-  .point summary .gate { color: var(--gold-light); font-size: 13px; font-weight: 600; }
-  .point[open] summary { border-radius: 14px 14px 0 0; }
-  .point .detail {
-    background: var(--cream);
-    border-radius: 0 0 14px 14px;
-    padding: 16px 18px;
-    font-size: 14px;
-    border: 1px solid rgba(15,61,48,.12);
-    border-top: none;
-  }
+  .map-tooltip { font-weight: 700; color: var(--green-deep); }
+  .map-tooltip .gate { display: block; font-weight: 600; color: var(--green); font-size: 12px; }
+  .map-popup { font-size: 13px; max-width: 220px; }
+  .map-popup h3 { color: var(--green-deep); margin-bottom: 4px; }
+  .map-popup .gate { color: var(--gold); font-weight: 700; font-size: 12px; margin-bottom: 6px; display: block; }
 
   /* ABOUT TEASER */
   .about-teaser { max-width: 720px; margin: 0 auto; text-align: center; }
@@ -304,6 +291,7 @@
 </section>
 
 <section class="explore" id="explore">
+  <img src="לוגו 108.jpg" alt="מסע ההיזכרות" style="width:110px;border-radius:12px;margin:0 auto 24px;">
   <h2>מה תמצאו כאן?</h2>
   <p class="sub">כל המסלולים, הסדנאות וההכשרות שדרכן אפשר ללמוד, לצמוח ולהיזכר במי שאת</p>
   <div class="carousel">
@@ -337,48 +325,7 @@
     <span><span class="dot-key" style="background:var(--blue)"></span>כחול - מקומות שמהם ייצאו רטריטים</span>
     <span><span class="dot-key" style="background:var(--turquoise)"></span>טורקיז - מקומות שעוד לוחשים "אולי"</span>
   </div>
-  <div class="points">
-    <details class="point">
-      <summary><div class="glow g-gold"></div><h3>מצרים</h3><div class="gate">שער החכמה העתיקה</div></summary>
-      <div class="detail">נזכרת בתודעת מאסטר תות. חכמה עתיקה שהוסתרה אלפי שנים. זכיתי, ואני זוכה לאפשר לאחרים להיזכר.</div>
-    </details>
-    <details class="point">
-      <summary><div class="glow g-gold"></div><h3>הוואי</h3><div class="gate">שער האהבה ללא תנאי</div></summary>
-      <div class="detail">חיבור למקור. אהבה ללא תנאי. היזכרות עמוקה. הדולפינים הזכירו לי שמחה, תמימות וזרימה.</div>
-    </details>
-    <details class="point">
-      <summary><div class="glow g-gold"></div><h3>שאסטה</h3><div class="gate">שער השקט וההר</div></summary>
-      <div class="detail">מקום של עוצמה, טבע ודממה. הזמנה להקשיב פנימה.</div>
-    </details>
-    <details class="point">
-      <summary><div class="glow g-gold"></div><h3>דמנהור</h3><div class="gate">שער הקהילה והחזון</div></summary>
-      <div class="detail">מקום שהזכיר לי שאפשר לחלום, ליצור ולחיות אחרת.</div>
-    </details>
-    <details class="point">
-      <summary><div class="glow g-blue"></div><h3>קוסטה ריקה</h3><div class="gate">שער ההתחדשות</div></summary>
-      <div class="detail">מעיין הנעורים והנצח. המקום קורא לי - ריו פרלס, המים, הטבע, החיים. לא לחפש נעורים, אלא להיזכר בנצח שבתוכנו. רטריטים עתידיים ייצאו כאשר תגיע הקריאה.</div>
-    </details>
-    <details class="point">
-      <summary><div class="glow g-blue"></div><h3>רומניה</h3><div class="gate">שער השורשים</div></summary>
-      <div class="detail">ארץ הולדתי. חזרה הביתה. מסעות של שורשים, משפחה וזיכרון.</div>
-    </details>
-    <details class="point">
-      <summary><div class="glow g-blue"></div><h3>קפריסין</h3><div class="gate">שער המנוחה והים</div></summary>
-      <div class="detail">מרחב של נשימה, שלווה והתחדשות.</div>
-    </details>
-    <details class="point">
-      <summary><div class="glow g-blue"></div><h3>בולגריה</h3><div class="gate">שער הפשטות והטבע</div></summary>
-      <div class="detail">אדמה, מים, קהילה ופשטות.</div>
-    </details>
-    <details class="point">
-      <summary><div class="glow g-turq"></div><h3>פרו</h3><div class="gate">שער המסתורין</div></summary>
-      <div class="detail">אולי - אם וכאשר תגיע הקריאה.</div>
-    </details>
-    <details class="point">
-      <summary><div class="glow g-turq"></div><h3>יוון</h3><div class="gate">שער השמחה וההתענגות</div></summary>
-      <div class="detail">ים. שמחה. חברות. פשטות.</div>
-    </details>
-  </div>
+  <div id="worldMap"></div>
 </section>
 
 <section class="about-teaser" id="about-teaser">
@@ -435,6 +382,55 @@
   let auto = setInterval(() => goTo(index + 1), 4000);
   document.querySelector('.carousel').addEventListener('mouseenter', () => clearInterval(auto));
   document.querySelector('.carousel').addEventListener('mouseleave', () => auto = setInterval(() => goTo(index + 1), 4000));
+</script>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const gates = [
+    { name: 'מצרים',     gate: 'שער החכמה העתיקה',   cat: 'g-gold', lat: 29.9773, lng: 31.1325,
+      detail: 'נזכרת בתודעת מאסטר תות. חכמה עתיקה שהוסתרה אלפי שנים. זכיתי, ואני זוכה לאפשר לאחרים להיזכר.' },
+    { name: 'הוואי',     gate: 'שער האהבה ללא תנאי', cat: 'g-gold', lat: 20.7967, lng: -156.3319,
+      detail: 'חיבור למקור. אהבה ללא תנאי. היזכרות עמוקה. הדולפינים הזכירו לי שמחה, תמימות וזרימה.' },
+    { name: 'שאסטה',     gate: 'שער השקט וההר',      cat: 'g-gold', lat: 41.4092, lng: -122.1949,
+      detail: 'מקום של עוצמה, טבע ודממה. הזמנה להקשיב פנימה.' },
+    { name: 'דמנהור',    gate: 'שער הקהילה והחזון',  cat: 'g-gold', lat: 45.4000, lng: 7.7000,
+      detail: 'מקום שהזכיר לי שאפשר לחלום, ליצור ולחיות אחרת.' },
+    { name: 'קוסטה ריקה', gate: 'שער ההתחדשות',      cat: 'g-blue', lat: 9.7489, lng: -83.7534,
+      detail: 'מעיין הנעורים והנצח. המקום קורא לי - ריו פרלס, המים, הטבע, החיים. לא לחפש נעורים, אלא להיזכר בנצח שבתוכנו. רטריטים עתידיים ייצאו כאשר תגיע הקריאה.' },
+    { name: 'רומניה',    gate: 'שער השורשים',        cat: 'g-blue', lat: 45.9432, lng: 24.9668,
+      detail: 'ארץ הולדתי. חזרה הביתה. מסעות של שורשים, משפחה וזיכרון.' },
+    { name: 'קפריסין',   gate: 'שער המנוחה והים',    cat: 'g-blue', lat: 35.1264, lng: 33.4299,
+      detail: 'מרחב של נשימה, שלווה והתחדשות.' },
+    { name: 'בולגריה',   gate: 'שער הפשטות והטבע',   cat: 'g-blue', lat: 42.7339, lng: 25.4858,
+      detail: 'אדמה, מים, קהילה ופשטות.' },
+    { name: 'פרו',       gate: 'שער המסתורין',       cat: 'g-turq', lat: -9.1900, lng: -75.0152,
+      detail: 'אולי - אם וכאשר תגיע הקריאה.' },
+    { name: 'יוון',      gate: 'שער השמחה וההתענגות', cat: 'g-turq', lat: 39.0742, lng: 21.8243,
+      detail: 'ים. שמחה. חברות. פשטות.' }
+  ];
+
+  const map = L.map('worldMap', { scrollWheelZoom: false, minZoom: 2 }).setView([25, 15], 2);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+    maxZoom: 18
+  }).addTo(map);
+
+  gates.forEach(g => {
+    const icon = L.divIcon({
+      className: '',
+      html: `<div class="glow ${g.cat}"></div>`,
+      iconSize: [16, 16],
+      iconAnchor: [8, 8]
+    });
+    const marker = L.marker([g.lat, g.lng], { icon }).addTo(map);
+    marker.bindTooltip(
+      `<span class="map-tooltip">${g.name}<span class="gate">${g.gate}</span></span>`,
+      { direction: 'top', offset: [0, -6] }
+    );
+    marker.bindPopup(
+      `<div class="map-popup"><h3>${g.name}</h3><span class="gate">${g.gate}</span>${g.detail}</div>`
+    );
+  });
 </script>
 
 </body>
