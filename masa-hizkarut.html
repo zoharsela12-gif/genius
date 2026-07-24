@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מסע ההיזכרות - 108 קודי הברקת | האקדמיה לגאונות בפשטות</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=David+Libre:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A227;
+    --gold-light: #E3C766;
+    --green-deep: #0F3D30;
+    --green: #1B7A5E;
+    --cream: #FBF8F1;
+    --text: #22301F;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'David Libre', 'Assistant', Arial, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  a { text-decoration: none; color: inherit; }
+  ul { list-style: none; }
+  img { max-width: 100%; display: block; }
+  section { padding: 64px 6%; }
+  h2 {
+    text-align: center;
+    color: var(--green-deep);
+    font-size: clamp(24px, 2.6vw, 32px);
+    margin-bottom: 18px;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    padding: 18px 6%;
+    background: var(--green-deep);
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+  nav ul { display: flex; flex-wrap: wrap; gap: 26px; justify-content: center; }
+  nav a { font-size: 14px; font-weight: 700; color: var(--cream); }
+  nav a:hover { color: var(--gold-light); }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 700;
+    border: 2px solid var(--green-deep);
+    color: var(--green-deep);
+    transition: all .2s;
+  }
+  .btn:hover { background: var(--green-deep); color: var(--cream); }
+  .btn.primary { background: var(--gold); border-color: var(--gold); color: var(--green-deep); }
+  .btn.primary:hover { background: var(--gold-light); border-color: var(--gold-light); }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 24px; }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .hero .eyebrow { color: var(--gold); font-weight: 700; margin-bottom: 10px; font-size: 15px; }
+  .hero h1 { font-size: clamp(30px, 3.6vw, 44px); color: var(--green-deep); margin-bottom: 22px; }
+  .hero p { font-size: 18px; margin-bottom: 10px; }
+  .hero p.pause { color: var(--gold); font-weight: 700; margin: 18px 0; }
+
+  /* DARK BLOCK (offering sections) */
+  .offer { background: var(--green-deep); }
+  .offer h2 { color: var(--gold); }
+  .offer .body { max-width: 640px; margin: 0 auto; text-align: center; color: var(--cream); }
+  .offer .body p { margin-bottom: 10px; font-size: 17px; }
+  .offer .wow {
+    margin-top: 20px;
+    font-weight: 700;
+    color: var(--gold-light);
+    font-size: 18px;
+  }
+
+  /* LIGHT BLOCK */
+  .offer.light { background: var(--cream); }
+  .offer.light h2 { color: var(--green-deep); }
+  .offer.light .body { color: var(--text); }
+
+  .placeholder-note {
+    text-align: center;
+    font-size: 13px;
+    color: var(--green);
+    opacity: .75;
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+
+  /* INCLUDES */
+  .includes { background: var(--green-deep); text-align: center; }
+  .includes h2 { color: var(--gold); }
+  .include-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    max-width: 800px;
+    margin: 36px auto 30px;
+  }
+  .include-card {
+    background: var(--cream);
+    border-radius: 12px;
+    padding: 24px 16px;
+    border-top: 4px solid var(--gold);
+  }
+  .include-card .count { font-size: 28px; font-weight: 700; color: var(--green-deep); }
+  .include-card .label { font-size: 14px; margin-top: 6px; }
+  .includes .tagline { color: var(--cream); opacity: .9; font-size: 16px; }
+
+  /* CLOSING */
+  .closing { text-align: center; max-width: 640px; margin: 0 auto; }
+  .closing .q { font-size: 20px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; }
+  .closing .words {
+    margin-top: 18px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: .5px;
+  }
+
+  /* CONTACT */
+  .contact { background: var(--green-deep); text-align: center; }
+  .contact h2 { color: var(--gold); }
+  .contact-form {
+    max-width: 460px;
+    margin: 24px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .contact-form input, .contact-form textarea {
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: none;
+    font-family: inherit;
+    font-size: 15px;
+  }
+  .contact-form textarea { min-height: 90px; resize: vertical; }
+  .contact-form button {
+    padding: 13px;
+    border-radius: 999px;
+    border: none;
+    background: var(--gold);
+    color: var(--green-deep);
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .contact-form button:hover { background: var(--gold-light); }
+
+  footer {
+    text-align: center;
+    padding: 22px 6%;
+    font-size: 13px;
+    color: var(--cream);
+    background: var(--green-deep);
+    border-top: 1px solid rgba(251,248,241,.15);
+  }
+  footer .tagline {
+    white-space: nowrap;
+    overflow-x: auto;
+    font-size: clamp(12px, 2.4vw, 16px);
+    font-weight: 700;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <ul>
+      <li><a href="index.html">← חזרה לעמוד הראשי</a></li>
+      <li><a href="masa-hizkarut.html">מסע היזכרות</a></li>
+      <li><a href="index.html#explore">טיפולים</a></li>
+      <li><a href="index.html#explore">קורסים והכשרות</a></li>
+      <li><a href="about.html">מי אני?</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">מסע ההיזכרות</div>
+  <h1>108 קודי הברקת</h1>
+  <p>לא, זה לא עוד קלף.</p>
+  <p>זה בית שלם.</p>
+  <p class="pause">רגע…</p>
+  <p>מה זה בכלל 108 קודי הברקת?</p>
+  <p>אפשר להסביר. אבל האמת? יותר קל לחוות.</p>
+  <p>כי הקודים לא באו ללמד אותך להיות מישהי אחרת.</p>
+  <p><strong>הם באו להזכיר לך מי את.</strong></p>
+</section>
+
+<section class="offer">
+  <h2>אז מה מחכה לך כאן?</h2>
+  <div class="body">
+    <p>מסע ההיזכרות - מסע של כשלושה חודשים.</p>
+    <p>מפגשים. תרגולים. קהילה. 108 קודי הברקת.</p>
+    <p class="wow">והמון רגעי: "וואו… איך שכחתי את זה?"</p>
+  </div>
+  <div class="btn-row">
+    <a class="btn primary" href="#contact">השארת פרטים</a>
+  </div>
+</section>
+
+<section class="offer light">
+  <h2>מאפשרות קודי הברקת</h2>
+  <div class="body">
+    <p>העמקה. תרגול. חיים עם הקודים. קהילת המשך.</p>
+    <p>למי שמרגישה שהמסע היה רק ההתחלה.</p>
+  </div>
+  <div class="btn-row">
+    <a class="btn primary" href="#contact">מעניין אותי - השארת פרטים</a>
+  </div>
+</section>
+
+<section class="offer">
+  <h2>מאסטר בקודי הברקת</h2>
+  <div class="body">
+    <p>לנשים שמרגישות שהגיע הזמן להעביר הלאה.</p>
+    <p>להחזיק מרחבים. ללוות. ולהדליק אור אצל אחרות.</p>
+  </div>
+  <div class="btn-row">
+    <a class="btn primary" href="#contact">ספרי לי עוד</a>
+  </div>
+</section>
+
+<section class="offer light">
+  <h2>קורס דיגיטלי</h2>
+  <p class="placeholder-note">(תוכן מורחב יתווסף כאן בהמשך)</p>
+  <div class="body">
+    <p>כי לא כולן גרות ליד חדרה. ולא כולן פנויות באותו יום.</p>
+    <p>והחדשות הטובות? הנשמה לא מכירה בפקקים.</p>
+    <p>אפשר ללמוד גם מהבית.</p>
+  </div>
+  <div class="btn-row">
+    <a class="btn primary" href="#contact">לרכישת המסע הדיגיטלי</a>
+  </div>
+</section>
+
+<section class="includes">
+  <h2>ומה כוללים 108 קודי הברקת?</h2>
+  <div class="include-grid">
+    <div class="include-card"><div class="count">55</div><div class="label">שערי הנביעה</div></div>
+    <div class="include-card"><div class="count">40</div><div class="label">קלפי האלדרס</div></div>
+    <div class="include-card"><div class="count">13</div><div class="label">קודי העל</div></div>
+  </div>
+  <p class="tagline">ביחד הם יוצרים דרך. לא תיאוריה. דרך חיים.</p>
+</section>
+
+<section class="closing">
+  <p class="q">שאלה קטנה…</p>
+  <p>מה אם לא הגעת לכאן כדי ללמוד משהו חדש?</p>
+  <p>מה אם הגעת כדי להיזכר?</p>
+  <p class="words">נזכרות • מאפשרות • מנהיגות</p>
+  <div class="btn-row">
+    <a class="btn primary" href="#contact">להצטרפות למסע</a>
+    <a class="btn" href="#contact">לקורס הדיגיטלי</a>
+    <a class="btn" href="#contact">לקביעת שיחת היכרות</a>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <h2>השארת פרטים</h2>
+  <form class="contact-form">
+    <input type="text" placeholder="שם מלא" required>
+    <input type="tel" placeholder="טלפון" required>
+    <input type="email" placeholder="אימייל">
+    <textarea placeholder="באיזה חלק במסע ההיזכרות את מעוניינת?"></textarea>
+    <button type="submit">שליחה</button>
+  </form>
+</section>
+
+<footer>
+  <p class="tagline">האקדמיה לגאונות בפשטות - הבית שלך להיזכרות</p>
+  &copy; 2026 האקדמיה לגאונות בפשטות | בת שבע צור
+</footer>
+
+</body>
+</html>
