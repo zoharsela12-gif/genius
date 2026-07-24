@@ -4,14 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ריטריטים ומסעות | האקדמיה לגאונות בפשטות</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=David+Libre:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --gold: #C9A227; --gold-light: #E3C766; --green-deep: #0F3D30; --green: #1B7A5E;
-    --blue: #2E6FBA; --turquoise: #2FB8B0;
     --cream: #FBF8F1; --card: #FFFDF9; --text: #22301F;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -68,22 +66,13 @@
   .card p { font-size: 17px; margin-bottom: 8px; }
 
   /* MAP */
-  .legend {
-    display: flex; flex-wrap: wrap; justify-content: center; gap: 18px;
-    margin: 20px 0 24px; font-size: 13px; font-weight: 600;
+  .map-image {
+    max-width: 1100px;
+    margin: 0 auto;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 12px 32px rgba(15,61,48,.14);
   }
-  .legend .dot-key { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-inline-end: 6px; vertical-align: middle; }
-  #worldMap { height: 460px; max-width: 100%; border-radius: 14px; overflow: hidden; z-index: 1; }
-  .glow { width: 16px; height: 16px; border-radius: 50%; box-shadow: 0 0 0 0 rgba(201,162,39,.6); animation: pulse 2.2s infinite; border: 2px solid var(--cream); }
-  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(201,162,39,.55); } 70% { box-shadow: 0 0 0 14px rgba(201,162,39,0); } 100% { box-shadow: 0 0 0 0 rgba(201,162,39,0); } }
-  .g-gold { background: var(--gold); }
-  .g-blue { background: var(--blue); box-shadow: 0 0 0 0 rgba(46,111,186,.6); animation-name: pulseBlue; }
-  .g-turq { background: var(--turquoise); box-shadow: 0 0 0 0 rgba(47,184,176,.6); animation-name: pulseTurq; }
-  @keyframes pulseBlue { 0% { box-shadow: 0 0 0 0 rgba(46,111,186,.55);} 70% { box-shadow: 0 0 0 14px rgba(46,111,186,0);} 100% { box-shadow: 0 0 0 0 rgba(46,111,186,0);} }
-  @keyframes pulseTurq { 0% { box-shadow: 0 0 0 0 rgba(47,184,176,.55);} 70% { box-shadow: 0 0 0 14px rgba(47,184,176,0);} 100% { box-shadow: 0 0 0 0 rgba(47,184,176,0);} }
-  .map-popup { font-size: 13px; max-width: 220px; }
-  .map-popup h3 { color: var(--green-deep); margin-bottom: 4px; }
-  .map-popup .gate { color: var(--gold); font-weight: 700; font-size: 12px; margin-bottom: 6px; display: block; }
 
   /* STORY GRID */
   .story-grid {
@@ -169,19 +158,10 @@
 <div class="wrap"><div class="divider"><span></span><div class="dot"></div><span></span></div></div>
 
 <div class="wrap" style="padding-top:0" id="map">
-  <div class="card dark">
-    <h2>🌍 מפת ההיזכרות</h2>
-    <p>באתר תמצאו מפת עולם אינטראקטיבית.</p>
-    <p>לא מפת טיולים. מפת סיפורים. מפת לב. מפת היזכרות.</p>
-    <p>על כל מקום אפשר יהיה ללחוץ, לראות תמונות, סרטונים, סיפורים, תובנות ורגעים שנחרטו בנשמה.</p>
-    <p style="margin-bottom:24px">וגם לגלות אילו שערים עוד מחכים להיפתח.</p>
-
-    <div class="legend">
-      <span><span class="dot-key" style="background:var(--gold)"></span>שערים שכבר נחוו</span>
-      <span><span class="dot-key" style="background:var(--blue)"></span>מקומות שמהם ייצאו רטריטים</span>
-      <span><span class="dot-key" style="background:var(--turquoise)"></span>מקומות שעוד לוחשים "אולי"</span>
-    </div>
-    <div id="worldMap"></div>
+  <h2 style="color:var(--green-deep)">🌍 מפת ההיזכרות</h2>
+  <p class="sub" style="text-align:center;max-width:640px;margin:0 auto 30px;font-size:17px">לא מפת טיולים. מפת סיפורים. מפת לב. מפת היזכרות.</p>
+  <div class="map-image">
+    <img src="מפת היזכרות.png" alt="מפת ההיזכרות שלי בעולם">
   </div>
 </div>
 
@@ -307,54 +287,6 @@
   <p class="tagline">האקדמיה לגאונות בפשטות - הבית שלך להיזכרות</p>
   &copy; 2026 האקדמיה לגאונות בפשטות | בת שבע צור
 </footer>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script>
-  const gates = [
-    { name: 'מצרים',     gate: 'שער החכמה העתיקה',   cat: 'g-gold', lat: 29.9773, lng: 31.1325,
-      detail: 'נזכרת בתודעת מאסטר תות. חכמה עתיקה שהוסתרה אלפי שנים. זכיתי, ואני זוכה לאפשר לאחרים להיזכר.' },
-    { name: 'הוואי',     gate: 'שער האהבה ללא תנאי', cat: 'g-gold', lat: 20.7967, lng: -156.3319,
-      detail: 'חיבור למקור. אהבה ללא תנאי. היזכרות עמוקה. הדולפינים הזכירו לי שמחה, תמימות וזרימה.' },
-    { name: 'שאסטה',     gate: 'שער השקט וההר',      cat: 'g-gold', lat: 41.4092, lng: -122.1949,
-      detail: 'מקום של עוצמה, טבע ודממה. הזמנה להקשיב פנימה.' },
-    { name: 'דמנהור',    gate: 'שער הקהילה והחזון',  cat: 'g-gold', lat: 45.4000, lng: 7.7000,
-      detail: 'מקום שהזכיר לי שאפשר לחלום, ליצור ולחיות אחרת. (מסע היזכרות מספר 3 - SOLD OUT)' },
-    { name: 'רומניה',    gate: 'שער השורשים',        cat: 'g-gold', lat: 45.9432, lng: 24.9668,
-      detail: 'ארץ הולדתי. חזרה הביתה. המקום שבו חזרתי להיות סילביה.' },
-    { name: 'הודו',      gate: 'הקריאה שעדיין לא הסתיימה', cat: 'g-gold', lat: 30.0869, lng: 78.2676,
-      detail: 'כבר ביקרתי בהודו. אבל משהו בי יודע שעוד אשוב - אולי לאיורוודה, אולי לריפוי, אולי פשוט כדי להאט.' },
-    { name: 'קוסטה ריקה', gate: 'שער ההתחדשות',      cat: 'g-blue', lat: 9.7489, lng: -83.7534,
-      detail: 'מעיין הנעורים והנצח. המקום קורא לי - ריו פרלס, המים, הטבע, החיים. רטריטים עתידיים ייצאו כאשר תגיע הקריאה.' },
-    { name: 'קפריסין',   gate: 'שער המנוחה והים',    cat: 'g-blue', lat: 35.1264, lng: 33.4299,
-      detail: 'מרחב של נשימה, שלווה והתחדשות.' },
-    { name: 'בולגריה',   gate: 'שער הפשטות והטבע',   cat: 'g-blue', lat: 42.7339, lng: 25.4858,
-      detail: 'אדמה, מים, קהילה ופשטות.' },
-    { name: 'פרו',       gate: 'שער המסתורין',       cat: 'g-turq', lat: -9.1900, lng: -75.0152,
-      detail: 'אולי - אם וכאשר תגיע הקריאה.' },
-    { name: 'יוון',      gate: 'שער השמחה וההתענגות', cat: 'g-turq', lat: 39.0742, lng: 21.8243,
-      detail: 'ים. שמחה. חברות. פשטות.' }
-  ];
-
-  const map = L.map('worldMap', { scrollWheelZoom: false, minZoom: 2 }).setView([25, 15], 2);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
-    maxZoom: 18
-  }).addTo(map);
-
-  gates.forEach(g => {
-    const icon = L.divIcon({
-      className: '',
-      html: `<div class="glow ${g.cat}"></div>`,
-      iconSize: [16, 16],
-      iconAnchor: [8, 8]
-    });
-    const marker = L.marker([g.lat, g.lng], { icon }).addTo(map);
-    marker.bindTooltip(
-      `<div class="map-popup"><h3>${g.name}</h3><span class="gate">${g.gate}</span>${g.detail}</div>`,
-      { direction: 'top', offset: [0, -6] }
-    );
-  });
-</script>
 
 </body>
 </html>
