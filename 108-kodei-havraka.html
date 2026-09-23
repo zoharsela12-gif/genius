@@ -63,12 +63,20 @@
 
   <!-- ===== FREE GIFT / LEAD MAGNET ===== -->
   <div style="width: 100%; background: #F1E6D8; padding: 70px 24px;">
-    <div style="max-width: 720px; margin: 0 auto; background: #FCF8F1; border: 1px solid rgba(201,162,39,0.35); border-radius: 22px; padding: 48px 40px; text-align: center; box-shadow: 0 10px 30px rgba(61,31,53,0.06);">
+    <div style="max-width: 560px; margin: 0 auto; background: #FCF8F1; border: 1px solid rgba(201,162,39,0.35); border-radius: 22px; padding: 48px 40px; text-align: center; box-shadow: 0 10px 30px rgba(61,31,53,0.06);">
       <h3 style="font-family: 'David Libre', serif; font-size: 28px; font-weight: 600; color: #3D1F35; margin: 0 0 14px;">רוצות לטעום מהמסע לפני שמתחילים?</h3>
       <p style="font-size: 19px; line-height: 1.8; color: #4A3B33; margin: 0 0 30px;">
         השאירו פרטים וקבלו במתנה את &ldquo;ספר ההתעוררות &mdash; 18 מפתחות להתעוררות&rdquo;
       </p>
-      <a href="#hartsama" class="cta-btn" style="display: inline-block; background: #C9A227; color: #0D4A2E; font-weight: 700; font-size: 19px; padding: 16px 42px; border-radius: 36px; box-shadow: 0 8px 20px rgba(0,0,0,0.15);">קבלו את הספר במתנה</a>
+      <form id="giftForm" style="display: flex; flex-direction: column; gap: 14px; text-align: right;">
+        <input type="hidden" name="access_key" value="2cfdfda1-15a4-4215-aeca-450f6ab4c500">
+        <input type="hidden" name="subject" value="הפניה מעמוד נחיתה - בקשת ספר מתנה">
+        <input type="hidden" name="from_name" value="דף נחיתה - ספר מתנה">
+        <input type="hidden" name="redirect" value="false">
+        <input type="text" name="name" placeholder="שם מלא" required style="width:100%; padding: 14px 18px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.1); font-family: 'David Libre', 'Assistant', sans-serif; font-size: 16px;">
+        <input type="email" name="email" placeholder="אימייל" required style="width:100%; padding: 14px 18px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.1); font-family: 'David Libre', 'Assistant', sans-serif; font-size: 16px;">
+        <button type="submit" class="cta-btn" style="background: #C9A227; color: #0D4A2E; font-weight: 700; font-size: 19px; padding: 16px 42px; border: none; border-radius: 36px; box-shadow: 0 8px 20px rgba(0,0,0,0.15);">קבלו את הספר במתנה</button>
+      </form>
     </div>
   </div>
 
@@ -249,6 +257,10 @@
         <input type="tel" name="phone" placeholder="טלפון" required>
         <input type="email" name="email" placeholder="אימייל">
         <textarea name="message" placeholder="ספרי לי קצת על מה שמביא אותך למסע"></textarea>
+        <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: #E4D3CC; margin-bottom: 4px; cursor: pointer;">
+          <input type="checkbox" name="marketing_consent" value="מאשרת" style="margin-top: 3px; flex-shrink: 0;">
+          <span>אני מאשרת לקבל עדכונים, תכנים ופרסומים נוספים מבת שבע ומהאקדמיה לגאונות בפשטות</span>
+        </label>
         <button type="submit" class="cta-btn" style="width: 100%; background: #C9A227; color: #0D4A2E; font-weight: 700; font-size: 22px; padding: 18px; border: none; border-radius: 44px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">כן, אני רוצה להיזכר &larr;</button>
       </form>
       <div style="font-size: 16px; color: #C9B8AE;">מספר המקומות מוגבל &mdash; ליווי אישי ומעמיק לאורך כל המסע</div>
@@ -288,6 +300,36 @@
       const json = await res.json();
       if (json.success) {
         form.innerHTML = '<p style="font-size:20px;font-weight:700;text-align:center;color:#FCF6EA;">תודה! קיבלנו את הפנייה ונחזור אלייך בהקדם &#128154;</p>';
+      } else {
+        btn.textContent = originalText;
+        btn.disabled = false;
+        alert('משהו השתבש, נסי שוב או צרי קשר בטלפון.');
+      }
+    } catch (err) {
+      btn.textContent = originalText;
+      btn.disabled = false;
+      alert('משהו השתבש, נסי שוב או צרי קשר בטלפון.');
+    }
+  });
+})();
+
+(function() {
+  const form = document.getElementById('giftForm');
+  if (!form) return;
+  const btn = form.querySelector('button[type="submit"]');
+  const originalText = btn.textContent;
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    btn.textContent = 'שולחת...';
+    btn.disabled = true;
+    try {
+      const data = new FormData(form);
+      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+      const json = await res.json();
+      if (json.success) {
+        form.innerHTML = '<p style="font-size:18px;font-weight:700;text-align:center;color:#3D1F35;margin-bottom:16px;">תודה! הספר שלך מוכן &#127775;</p>' +
+          '<a href="ספר התעוררות.pdf" target="_blank" rel="noopener" style="display:block;text-align:center;background:#125F3C;color:#FCF6EA;font-weight:700;font-size:18px;padding:16px;border-radius:36px;">לפתיחת ספר ההתעוררות &larr;</a>';
       } else {
         btn.textContent = originalText;
         btn.disabled = false;
