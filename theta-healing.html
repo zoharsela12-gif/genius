@@ -102,11 +102,15 @@
 <div class="wrap" id="contact">
   <div class="contact-card">
     <h2>השארת פרטים</h2>
-    <form class="contact-form">
-      <input type="text" placeholder="שם מלא" required>
-      <input type="tel" placeholder="טלפון" required>
-      <input type="email" placeholder="אימייל">
-      <textarea placeholder="ספרי לי קצת על מה שמעניין אותך"></textarea>
+    <form class="contact-form" id="leadForm">
+      <input type="hidden" name="access_key" value="2cfdfda1-15a4-4215-aeca-450f6ab4c500">
+      <input type="hidden" name="subject" value="הפניה מהאתר">
+      <input type="hidden" name="from_name" value="תטא הילינג">
+      <input type="hidden" name="redirect" value="false">
+      <input type="text" name="name" placeholder="שם מלא" required>
+      <input type="tel" name="phone" placeholder="טלפון" required>
+      <input type="email" name="email" placeholder="אימייל">
+      <textarea name="message" placeholder="ספרי לי קצת על מה שמעניין אותך"></textarea>
       <button type="submit">שליחה</button>
     </form>
   </div>
@@ -116,6 +120,37 @@
   <p class="tagline">האקדמיה לגאונות בפשטות - הבית שלך להיזכרות</p>
   &copy; 2026 האקדמיה לגאונות בפשטות | בת שבע צור
 </footer>
+
+<script>
+(function() {
+  const form = document.getElementById('leadForm');
+  if (!form) return;
+  const btn = form.querySelector('button[type="submit"]');
+  const originalText = btn.textContent;
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    btn.textContent = 'שולח...';
+    btn.disabled = true;
+    try {
+      const data = new FormData(form);
+      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+      const json = await res.json();
+      if (json.success) {
+        form.innerHTML = '<p style="font-size:18px;font-weight:700;text-align:center;">תודה! קיבלנו את הפנייה ונחזור אלייך בהקדם 💚</p>';
+      } else {
+        btn.textContent = originalText;
+        btn.disabled = false;
+        alert('משהו השתבש, נסי שוב או צרי קשר בטלפון.');
+      }
+    } catch (err) {
+      btn.textContent = originalText;
+      btn.disabled = false;
+      alert('משהו השתבש, נסי שוב או צרי קשר בטלפון.');
+    }
+  });
+})();
+</script>
 
 </body>
 </html>
