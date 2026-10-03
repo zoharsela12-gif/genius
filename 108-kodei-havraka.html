@@ -39,7 +39,8 @@
     <div style="position: relative; font-family: 'David Libre', serif; font-weight: 700; font-style: italic; font-size: 40px; color: #C9A227; margin: 0 0 36px;">108 קודי הברקת</div>
     <p style="position: relative; font-size: 22px; line-height: 1.75; color: #EDE0D8; max-width: 620px; margin: 0 0 44px;">
       הגיע הזמן שהעוצמה של המנהיגות הנשית תחזור לקדמת הבמה.<br>
-      שלושה חודשים של היזכרות, התעוררות וחיבור &mdash; לחזור לפעול מהמקום הגדול, הפשוט והעוצמתי שכבר קיים בך.
+      מסע של היזכרות, התעוררות וחיבור לחזור לפעול<br>
+      מהמקום הגדול, הפשוט והעוצמתי שכבר קיים בך.
     </p>
     <a href="#hartsama" class="cta-btn" style="position: relative; display: inline-block; background: #C9A227; color: #0D4A2E; font-weight: 700; font-size: 21px; padding: 18px 48px; border-radius: 40px; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">שריינו לי מקום במסע</a>
   </div>
@@ -137,7 +138,7 @@
     <div style="max-width: 1040px; margin: 0 auto;">
       <div style="text-align: center; margin-bottom: 64px;">
         <div style="font-size: 16px; letter-spacing: 3px; color: #A8C98A; font-weight: 700; margin-bottom: 14px;">איך זה בנוי</div>
-        <h2 style="font-family: 'David Libre', serif; font-size: 39px; font-weight: 600; color: #FCF6EA; margin: 0 0 16px;">שלושה חודשים מלאי עוצמה</h2>
+        <h2 style="font-family: 'David Libre', serif; font-size: 39px; font-weight: 600; color: #FCF6EA; margin: 0 0 16px;">מסע מלא עוצמה</h2>
         <p style="font-size: 20px; color: #E4D3CC; max-width: 560px; margin: 0 auto;">ליווי מלא לאורך התהליך &mdash; שילוב של מפגשי זום ומפגשים פרונטליים</p>
       </div>
       <div style="display: flex; gap: 28px; flex-wrap: wrap; justify-content: center;">
@@ -148,10 +149,6 @@
         <div style="flex: 1; min-width: 220px; max-width: 240px; text-align: center; background: rgba(255,255,255,0.04); border: 1px solid rgba(243,215,126,0.25); border-radius: 16px; padding: 32px 20px;">
           <div style="font-family: 'David Libre', serif; font-size: 43px; color: #A8C98A; margin-bottom: 10px;">3</div>
           <div style="font-size: 19px; color: #FCF6EA; font-weight: 600;">מפגשים פרונטליים</div>
-        </div>
-        <div style="flex: 1; min-width: 220px; max-width: 240px; text-align: center; background: rgba(255,255,255,0.04); border: 1px solid rgba(243,215,126,0.25); border-radius: 16px; padding: 32px 20px;">
-          <div style="font-family: 'David Libre', serif; font-size: 43px; color: #A8C98A; margin-bottom: 10px;">3</div>
-          <div style="font-size: 19px; color: #FCF6EA; font-weight: 600;">חודשי ליווי מלא</div>
         </div>
       </div>
     </div>
@@ -328,8 +325,7 @@
       const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
       const json = await res.json();
       if (json.success) {
-        form.innerHTML = '<p style="font-size:18px;font-weight:700;text-align:center;color:#3D1F35;margin-bottom:16px;">תודה! הספר שלך מוכן &#127775;</p>' +
-          '<a href="ספר התעוררות.pdf" target="_blank" rel="noopener" style="display:block;text-align:center;background:#125F3C;color:#FCF6EA;font-weight:700;font-size:18px;padding:16px;border-radius:36px;">לפתיחת ספר ההתעוררות &larr;</a>';
+        window.location.href = 'todah-sefer.html';
       } else {
         btn.textContent = originalText;
         btn.disabled = false;
