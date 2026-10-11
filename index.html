@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=David+Libre:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --gold: #C9A227;
+    --gold: #C9A227; --gold-dark: #8A6A1E;
     --gold-light: #E3C766;
     --green-deep: #0F3D30;
     --green: #1B7A5E;
@@ -24,6 +24,7 @@
     line-height: 1.65;
   }
   a { text-decoration: none; color: inherit; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
   ul { list-style: none; }
   img { max-width: 100%; display: block; }
   section { padding: 70px 6%; }
@@ -72,7 +73,7 @@
   .about-logo { flex: 1.2; min-width: 300px; max-width: 480px; }
   .about-logo img { mix-blend-mode: multiply; }
   .about-text { flex: 1.3; min-width: 300px; }
-  .eyebrow { font-size: 15px; font-weight: 700; color: var(--gold); margin-bottom: 10px; }
+  .eyebrow { font-size: 15px; font-weight: 700; color: var(--gold-dark); margin-bottom: 10px; }
   .about-text h1 { font-size: clamp(26px, 3vw, 36px); color: var(--green-deep); margin-bottom: 18px; }
   .about-text p { margin-bottom: 14px; }
   .poem { font-size: clamp(18px, 2vw, 22px); font-weight: 600; color: var(--green-deep); margin: 22px 0; }
@@ -301,10 +302,14 @@
     <input type="hidden" name="subject" value="הפניה מהאתר">
     <input type="hidden" name="from_name" value="עמוד הבית">
     <input type="hidden" name="redirect" value="false">
-    <input type="text" name="name" placeholder="שם מלא" required>
-    <input type="tel" name="phone" placeholder="טלפון" required>
-    <input type="email" name="email" placeholder="אימייל">
-    <textarea name="message" placeholder="ספרי לי קצת על מה שאת מחפשת"></textarea>
+    <label for="home-name" class="sr-only">שם מלא</label>
+    <input type="text" id="home-name" name="name" placeholder="שם מלא" required>
+    <label for="home-phone" class="sr-only">טלפון</label>
+    <input type="tel" id="home-phone" name="phone" placeholder="טלפון" required>
+    <label for="home-email" class="sr-only">אימייל</label>
+    <input type="email" id="home-email" name="email" placeholder="אימייל">
+    <label for="home-message" class="sr-only">הודעה</label>
+    <textarea id="home-message" name="message" placeholder="ספרי לי קצת על מה שאת מחפשת"></textarea>
     <button type="submit">שליחה</button>
   </form>
   <p class="closing-line">כי בסופו של דבר, לא באנו לעולם כדי להיות מישהו אחר. באנו להיזכר.</p>
@@ -312,6 +317,7 @@
 
 <footer>
   <p class="tagline">האקדמיה לגאונות בפשטות - הבית שלך להיזכרות</p>
+  <p style="margin-bottom:8px;font-size:12px;"><a href="privacy.html" style="color:inherit;">מדיניות פרטיות</a> · <a href="terms.html" style="color:inherit;">תנאי שימוש</a> · <a href="accessibility.html" style="color:inherit;">הצהרת נגישות</a></p>
   &copy; 2026 האקדמיה לגאונות בפשטות | בת שבע צור
 </footer>
 

@@ -11,6 +11,7 @@
   body { margin: 0; direction: rtl; }
   * { box-sizing: border-box; }
   a { color: inherit; text-decoration: none; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
   .cta-btn { transition: transform .15s ease, box-shadow .15s ease; cursor: pointer; }
   .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(13,74,46,0.35); }
   .cta-btn:focus-visible { outline: 3px solid #5B7A4A; outline-offset: 3px; }
@@ -85,8 +86,10 @@
           <input type="hidden" name="subject" value="הפניה מעמוד נחיתה - בקשת ספר מתנה">
           <input type="hidden" name="from_name" value="דף נחיתה - ספר מתנה">
           <input type="hidden" name="redirect" value="false">
-          <input type="text" name="name" placeholder="שם מלא" required style="width:100%; padding: 15px 18px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.15); font-family: 'David Libre', 'Assistant', sans-serif; font-size: 17px;">
-          <input type="email" name="email" placeholder="אימייל" required style="width:100%; padding: 15px 18px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.15); font-family: 'David Libre', 'Assistant', sans-serif; font-size: 17px;">
+          <label for="gift-name" class="sr-only">שם מלא</label>
+          <input type="text" id="gift-name" name="name" placeholder="שם מלא" required style="width:100%; padding: 15px 18px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.15); font-family: 'David Libre', 'Assistant', sans-serif; font-size: 17px;">
+          <label for="gift-email" class="sr-only">אימייל</label>
+          <input type="email" id="gift-email" name="email" placeholder="אימייל" required style="width:100%; padding: 15px 18px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.15); font-family: 'David Libre', 'Assistant', sans-serif; font-size: 17px;">
           <button type="submit" class="cta-btn" style="background: #C9A227; color: #0D4A2E; font-weight: 700; font-size: 21px; padding: 18px 42px; border: none; border-radius: 40px; box-shadow: 0 10px 26px rgba(201,162,39,0.45);">אני רוצה את המתנה &larr;</button>
         </form>
       </div>
@@ -282,10 +285,14 @@
         <input type="hidden" name="subject" value="הפניה מעמוד נחיתה- מסע התעוררות">
         <input type="hidden" name="from_name" value="דף נחיתה - 108 קודי הברקת">
         <input type="hidden" name="redirect" value="false">
-        <input type="text" name="name" placeholder="שם מלא" required>
-        <input type="tel" name="phone" placeholder="טלפון" required>
-        <input type="email" name="email" placeholder="אימייל">
-        <textarea name="message" placeholder="ספרי לי קצת על מה שמביא אותך למסע"></textarea>
+        <label for="main-name" class="sr-only">שם מלא</label>
+        <input type="text" id="main-name" name="name" placeholder="שם מלא" required>
+        <label for="main-phone" class="sr-only">טלפון</label>
+        <input type="tel" id="main-phone" name="phone" placeholder="טלפון" required>
+        <label for="main-email" class="sr-only">אימייל</label>
+        <input type="email" id="main-email" name="email" placeholder="אימייל">
+        <label for="main-message" class="sr-only">הודעה</label>
+        <textarea id="main-message" name="message" placeholder="ספרי לי קצת על מה שמביא אותך למסע"></textarea>
         <label style="display: block; font-size: 14px; color: #E4D3CC; margin-bottom: 4px; cursor: pointer; line-height: 1.6;">
           <input type="checkbox" name="marketing_consent" value="מאשרת" style="vertical-align: middle; margin-left: 8px;">
           אני מאשרת לקבל עדכונים, תכנים ופרסומים נוספים מבת שבע ומהאקדמיה לגאונות בפשטות
@@ -308,6 +315,7 @@
         <span style="font-size: 14px; color: #8C7A72;">מסע ההיזכרות הוא חלק מהאקדמיה לגאונות בפשטות</span>
       </a>
     </div>
+    <p style="margin-top: 24px; font-size: 12px;"><a href="privacy.html" style="color: #8C7A72;">מדיניות פרטיות</a> &middot; <a href="terms.html" style="color: #8C7A72;">תנאי שימוש</a> &middot; <a href="accessibility.html" style="color: #8C7A72;">הצהרת נגישות</a></p>
   </div>
 
 </div>

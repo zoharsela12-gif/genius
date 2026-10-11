@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=David+Libre:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --gold: #C9A227; --gold-light: #E3C766; --green-deep: #0F3D30; --green: #1B7A5E;
+    --gold: #C9A227; --gold-dark: #8A6A1E; --gold-light: #E3C766; --green-deep: #0F3D30; --green: #1B7A5E;
     --cream: #FBF8F1; --card: #FFFDF9; --text: #22301F;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -20,6 +20,7 @@
     color: var(--text); line-height: 1.7;
   }
   a { text-decoration: none; color: inherit; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
   ul { list-style: none; }
   .wrap { padding: 60px 6%; }
   h2 { text-align: center; color: var(--green-deep); font-size: clamp(24px, 2.6vw, 32px); margin-bottom: 18px; }
@@ -40,7 +41,7 @@
   .btn.primary:hover { background: var(--gold-light); border-color: var(--gold-light); }
   .btn-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 26px; }
   .hero { text-align: center; max-width: 640px; margin: 0 auto; }
-  .hero .eyebrow { color: var(--gold); font-weight: 700; margin-bottom: 10px; font-size: 15px; }
+  .hero .eyebrow { color: var(--gold-dark); font-weight: 700; margin-bottom: 10px; font-size: 15px; }
   .hero h1 { font-size: clamp(30px, 3.6vw, 44px); color: var(--green-deep); margin-bottom: 22px; }
   .card {
     max-width: 640px; margin: 0 auto; border-radius: 24px; padding: 48px 40px; text-align: center;
@@ -111,10 +112,14 @@
       <input type="hidden" name="subject" value="הפניה מהאתר">
       <input type="hidden" name="from_name" value="זוגיות משורש הנשמה">
       <input type="hidden" name="redirect" value="false">
-      <input type="text" name="name" placeholder="שם מלא" required>
-      <input type="tel" name="phone" placeholder="טלפון" required>
-      <input type="email" name="email" placeholder="אימייל">
-      <textarea name="message" placeholder="ספרי לי קצת על מה שמעניין אותך"></textarea>
+      <label for="zug-name" class="sr-only">שם מלא</label>
+      <input type="text" id="zug-name" name="name" placeholder="שם מלא" required>
+      <label for="zug-phone" class="sr-only">טלפון</label>
+      <input type="tel" id="zug-phone" name="phone" placeholder="טלפון" required>
+      <label for="zug-email" class="sr-only">אימייל</label>
+      <input type="email" id="zug-email" name="email" placeholder="אימייל">
+      <label for="zug-message" class="sr-only">הודעה</label>
+      <textarea id="zug-message" name="message" placeholder="ספרי לי קצת על מה שמעניין אותך"></textarea>
       <button type="submit">שליחה</button>
     </form>
   </div>
@@ -122,6 +127,7 @@
 
 <footer>
   <p class="tagline">האקדמיה לגאונות בפשטות - הבית שלך להיזכרות</p>
+  <p style="margin-bottom:8px;font-size:12px;"><a href="privacy.html" style="color:inherit;">מדיניות פרטיות</a> · <a href="terms.html" style="color:inherit;">תנאי שימוש</a> · <a href="accessibility.html" style="color:inherit;">הצהרת נגישות</a></p>
   &copy; 2026 האקדמיה לגאונות בפשטות | בת שבע צור
 </footer>
 
