@@ -134,6 +134,9 @@
   a.slide { display: block; cursor: pointer; transition: background .2s; }
   a.slide:hover { background: var(--gold-light); }
   a.slide .cta { display: block; margin-top: 10px; font-size: 13px; font-weight: 700; color: var(--gold-dark); }
+  a.slide.event-slide { padding: 0; background: var(--green-deep); }
+  a.slide.event-slide:hover { background: var(--green-deep); opacity: .92; }
+  a.slide.event-slide img { width: 100%; display: block; }
   .carousel-nav {
     display: flex;
     justify-content: center;
@@ -263,6 +266,28 @@
   </div>
 </section>
 
+<section class="explore" id="events">
+  <h2>מה קורה בקרוב?</h2>
+  <p class="sub">כל המסלולים הקרובים, הסדנאות וההכשרות שדרכן אפשר ללמוד, לצמוח ולהיזכר במי שאת</p>
+  <div class="carousel">
+    <div class="carousel-track">
+      <div class="carousel-slides" id="eventSlides">
+        <a class="slide event-slide" href="108-kodei-havraka.html"><img src="1.png" alt="מסע ההיזכרות - מסע מספר 3 יוצא לדרך, מתחיל 21/12"></a>
+        <a class="slide event-slide" href="retritim.html"><img src="2 מקומות אחרונים.png" alt="ריטריט בדמנהור - 2 מקומות אחרונים, 5-11 בנובמבר"></a>
+        <a class="slide event-slide" href="index.html#contact"><img src="2.png" alt="פותחות שער - מפגש בזום, 20/10 בשעה 20:00"></a>
+        <a class="slide event-slide" href="index.html#contact"><img src="4.png" alt="פותחות שער - מפגש פנים אל פנים, 23/10 בשעה 10:00"></a>
+        <a class="slide event-slide" href="index.html#contact"><img src="3.png" alt="פותחות שער - מפגש בזום, 1/11 בשעה 20:00"></a>
+        <a class="slide event-slide" href="laser-lanshama.html"><img src="5.png" alt="טיפול לייזר לנשמה - לחצו להשארת פרטים"></a>
+      </div>
+    </div>
+    <div class="carousel-nav">
+      <button class="carousel-arrow" id="eventPrevBtn">›</button>
+      <div class="carousel-dots" id="eventDots"></div>
+      <button class="carousel-arrow" id="eventNextBtn">‹</button>
+    </div>
+  </div>
+</section>
+
 <section class="explore" id="explore">
   <h2>מה תמצאו כאן?</h2>
   <p class="sub">כל המסלולים, הסדנאות וההכשרות שדרכן אפשר ללמוד, לצמוח ולהיזכר במי שאת</p>
@@ -325,32 +350,38 @@
 </footer>
 
 <script>
-  const slidesEl = document.getElementById('slides');
-  const slides = slidesEl.children;
-  const dotsEl = document.getElementById('dots');
-  let index = 0;
+  function initCarousel(slidesId, dotsId, prevId, nextId) {
+    const slidesEl = document.getElementById(slidesId);
+    const slides = slidesEl.children;
+    const dotsEl = document.getElementById(dotsId);
+    let index = 0;
 
-  for (let i = 0; i < slides.length; i++) {
-    const dot = document.createElement('div');
-    dot.className = 'dot' + (i === 0 ? ' active' : '');
-    dot.addEventListener('click', () => goTo(i));
-    dotsEl.appendChild(dot);
+    for (let i = 0; i < slides.length; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(dot);
+    }
+
+    function update() {
+      slidesEl.style.transform = `translateX(${index * 100}%)`;
+      [...dotsEl.children].forEach((d, i) => d.classList.toggle('active', i === index));
+    }
+    function goTo(i) {
+      index = (i + slides.length) % slides.length;
+      update();
+    }
+    document.getElementById(prevId).addEventListener('click', () => goTo(index - 1));
+    document.getElementById(nextId).addEventListener('click', () => goTo(index + 1));
+
+    let auto = setInterval(() => goTo(index + 1), 4000);
+    const carouselEl = slidesEl.closest('.carousel');
+    carouselEl.addEventListener('mouseenter', () => clearInterval(auto));
+    carouselEl.addEventListener('mouseleave', () => auto = setInterval(() => goTo(index + 1), 4000));
   }
 
-  function update() {
-    slidesEl.style.transform = `translateX(${index * 100}%)`;
-    [...dotsEl.children].forEach((d, i) => d.classList.toggle('active', i === index));
-  }
-  function goTo(i) {
-    index = (i + slides.length) % slides.length;
-    update();
-  }
-  document.getElementById('prevBtn').addEventListener('click', () => goTo(index - 1));
-  document.getElementById('nextBtn').addEventListener('click', () => goTo(index + 1));
-
-  let auto = setInterval(() => goTo(index + 1), 4000);
-  document.querySelector('.carousel').addEventListener('mouseenter', () => clearInterval(auto));
-  document.querySelector('.carousel').addEventListener('mouseleave', () => auto = setInterval(() => goTo(index + 1), 4000));
+  initCarousel('eventSlides', 'eventDots', 'eventPrevBtn', 'eventNextBtn');
+  initCarousel('slides', 'dots', 'prevBtn', 'nextBtn');
 </script>
 
 <script>
